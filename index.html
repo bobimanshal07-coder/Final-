@@ -142,7 +142,7 @@
 
     <!-- 1️⃣ Opening Screen -->
     <div id="screen1" class="screen active">
-        <img src="assets/monkey.png" alt="Cute Monkey" class="monkey-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3069/3069172.png'">
+        <img src="assets/monkey.png" alt="Cute Monkey" class="monkey-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><text y=\'80\' font-size=\'80\'>🐒</text></svg>'">
         <h2>For You 💌❤️</h2>
         <div class="timer-box">
             <div class="time-unit"><span id="days">00</span><label>Days</label></div>
@@ -210,7 +210,7 @@
             <p>✔ Galti hon te maaf kar dengi.</p>
             <br>
             <p><b>Signed By:</b> Riya (Bandri 🐒)</p>
-            <img id="saved-sig" style="width:100%; max-height:80px; object-fit:contain; border-bottom: 2px solid var(--primary-color);" />
+            <img id="saved-sig" style="width:100%; max-height:80px; object-fit:contain; border-bottom: 2px solid var(--primary-color);" alt="Signature" />
         </div>
         <button class="btn" onclick="nextScreen(6)">Continue ✨</button>
     </div>
@@ -240,7 +240,7 @@
         <button class="btn" onclick="unlockVault()">Unlock Vault 🔓</button>
     </div>
 
-    <!-- 📸 0️⃣8️⃣ Memories Section (1 to 9) -->
+    <!-- 📸 9️⃣ Memories Section (1 to 9) -->
     <div id="screen9" class="screen">
         <p id="mem-counter" style="font-size:0.85rem; font-weight:600; color:var(--primary-color);">Memory 1 of 9</p>
         <div class="card-container" onclick="flipCard()">
@@ -257,14 +257,14 @@
         <button class="btn" onclick="nextMemory()">Next Memory ➜</button>
     </div>
 
-    <!-- 🎂 1️⃣1️⃣ Final Wish -->
+    <!-- 🎂 11 Final Wish -->
     <div id="screen11" class="screen">
         <div class="garland">
-            <img src="assets/photo1.jpg" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'50\' height=\'50\' viewBox=\'0 0 50 50\'><circle cx=\'25\' cy=\'25\' r=\'25\' fill=\'%23ffccd5\'/></svg>'">
-            <img src="assets/photo2.jpg" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'50\' height=\'50\' viewBox=\'0 0 50 50\'><circle cx=\'25\' cy=\'25\' r=\'25\' fill=\'%23ffccd5\'/></svg>'">
-            <img src="assets/photo3.jpg" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'50\' height=\'50\' viewBox=\'0 0 50 50\'><circle cx=\'25\' cy=\'25\' r=\'25\' fill=\'%23ffccd5\'/></svg>'">
-            <img src="assets/photo4.jpg" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'50\' height=\'50\' viewBox=\'0 0 50 50\'><circle cx=\'25\' cy=\'25\' r=\'25\' fill=\'%23ffccd5\'/></svg>'">
-            <img src="assets/photo5.jpg" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'50\' height=\'50\' viewBox=\'0 0 50 50\'><circle cx=\'25\' cy=\'25\' r=\'25\' fill=\'%23ffccd5\'/></svg>'">
+            <img src="assets/photo1.jpg" alt="garland1" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'50\' height=\'50\' viewBox=\'0 0 50 50\'><circle cx=\'25\' cy=\'25\' r=\'25\' fill=\'%23ffccd5\'/></svg>'">
+            <img src="assets/photo2.jpg" alt="garland2" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'50\' height=\'50\' viewBox=\'0 0 50 50\'><circle cx=\'25\' cy=\'25\' r=\'25\' fill=\'%23ffccd5\'/></svg>'">
+            <img src="assets/photo3.jpg" alt="garland3" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'50\' height=\'50\' viewBox=\'0 0 50 50\'><circle cx=\'25\' cy=\'25\' r=\'25\' fill=\'%23ffccd5\'/></svg>'">
+            <img src="assets/photo4.jpg" alt="garland4" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'50\' height=\'50\' viewBox=\'0 0 50 50\'><circle cx=\'25\' cy=\'25\' r=\'25\' fill=\'%23ffccd5\'/></svg>'">
+            <img src="assets/photo5.jpg" alt="garland5" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'50\' height=\'50\' viewBox=\'0 0 50 50\'><circle cx=\'25\' cy=\'25\' r=\'25\' fill=\'%23ffccd5\'/></svg>'">
         </div>
         <h2>One Last Wish For You 🎂💗</h2>
         <div class="handwritten">
@@ -280,7 +280,7 @@
         <button class="btn" onclick="nextScreen(12)">A Little Something 🎧</button>
     </div>
 
-    <!-- 🎧 1️⃣2️⃣ Final Audio -->
+    <!-- 🎧 12 Final Audio -->
     <div id="screen12" class="screen">
         <div class="profile-header">
             <img src="assets/photo10.jpg" class="dp-img" alt="Riya DP" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 100 100\'><circle cx=\'50\' cy=\'50\' r=\'50\' fill=\'%23ffccd5\'/></svg>'">
@@ -296,7 +296,7 @@
         <button class="btn" onclick="nextScreen(13)">Next Surprise 🎁</button>
     </div>
 
-    <!-- 🎁 1️⃣3️⃣ 2027 Gift Mystery -->
+    <!-- 🎁 13 2027 Gift Mystery -->
     <div id="screen13" class="screen">
         <div style="font-size:70px; margin-bottom:10px;">🎁</div>
         <h2>2027 Gift Mystery 👀✨</h2>
@@ -357,6 +357,7 @@
 
         function initCanvas() {
             canvas = document.getElementById('sig-canvas');
+            if (!canvas) return;
             canvas.width = canvas.offsetWidth;
             canvas.height = canvas.offsetHeight;
             ctx = canvas.getContext('2d');
@@ -368,4 +369,113 @@
                 const rect = canvas.getBoundingClientRect();
                 const clientX = e.touches ? e.touches[0].clientX : e.clientX;
                 const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-     
+                return { x: clientX - rect.left, y: clientY - rect.top };
+            }
+
+            function startDraw(e) { drawing = true; const pos = getPos(e); ctx.beginPath(); ctx.moveTo(pos.x, pos.y); }
+            function draw(e) { if (!drawing) return; const pos = getPos(e); ctx.lineTo(pos.x, pos.y); ctx.stroke(); }
+            function stopDraw() { drawing = false; }
+
+            canvas.onmousedown = startDraw;
+            canvas.onmousemove = draw;
+            canvas.onmouseup = stopDraw;
+
+            canvas.ontouchstart = (e) => { e.preventDefault(); startDraw(e); };
+            canvas.ontouchmove = (e) => { e.preventDefault(); draw(e); };
+            canvas.ontouchend = stopDraw;
+        }
+
+        function clearCanvas() { 
+            if (ctx && canvas) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height); 
+            }
+        }
+
+        function lockSignature() {
+            if (canvas) {
+                const dataUrl = canvas.toDataURL();
+                document.getElementById('saved-sig').src = dataUrl;
+                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                setTimeout(() => nextScreen(5), 800);
+            }
+        }
+
+        // 6. Reasons Jar Logic
+        const reasons = [
+            "Your smile 😊", "Your cute nature 🫶", "Your caring heart ❤️", "Your beautiful soul ✨", "Your honesty 🤍",
+            "Your kindness 🌸", "Your voice 🥹", "Your laugh 😂❤️", "Your understanding 🫂", "Your little efforts 💕",
+            "You make me smile 😊", "You make me happy ❤️", "You understand me 🫶", "You listen to me 👂❤️", "You care about me 🥹",
+            "You motivate me 💪", "You support me 🤝", "You trust me 🤍", "You respect me ❤️", "You make me feel special ✨",
+            "Your cute anger 😤❤️", "Your silly talks 😂", "Your random messages 💬", "Your good-morning texts ☀️", "Your good-night texts 🌙",
+            "Your little surprises 🎀", "Your sweet words 💕", "Your patience 🫶", "Your positivity ✨", "Your confidence ❤️",
+            "Your innocence 🥹", "Your sense of humour 😂", "Your beautiful personality 🌸", "Your warm heart ❤️", "Your little habits 🫶",
+            "Your reactions 😂❤️", "Your way of talking 💬", "Your way of caring 🥹", "Your presence ✨", "Your company ❤️",
+            "You make ordinary days special 🌷", "You make me laugh 😂", "You calm me down 🫂", "You believe in me 🤍", "You appreciate me ❤️",
+            "You notice little things 🥹", "You remember small details 💕", "You never feel boring 😂", "You make conversations special 💬", "You are simply YOU ❤️",
+            "Your cute expressions 🥹", "Your beautiful thoughts ✨", "Your genuine heart 🤍", "Your sweet nature 🌸", "Your little jokes 😂",
+            "Your compliments ❤️", "Your attention 🫶", "Your loyalty 🤍", "Your respect for others 🌷", "Your beautiful energy ✨",
+            "You make me feel understood 🫂", "You make me feel valued ❤️", "You make me feel comfortable 🫶", "You bring peace to me 🤍", "You bring happiness to me 😊",
+            "You make me excited to talk 💬", "You make me miss you 🥹", "You make me care more ❤️", "You inspire me ✨", "You make life brighter 🌸",
+            "Your little “hmm” 😂", "Your cute replies 🥹", "Your random thoughts 💭", "Your caring questions ❤️", "Your beautiful smile 😊",
+            "Your adorable laugh 😂", "Your sweet gestures 💕", "Your thoughtful nature 🫶", "Your strong mindset 💪", "Your soft heart 🤍",
+            "You accept me as I am ❤️", "You make me feel lucky 🥹", "You make memories special ✨", "You make me laugh at myself 😂", "You make every chat better 💬",
+            "You make me look forward to tomorrow 🌅", "You bring out my happy side 😊", "You make me feel at home 🫂", "You are my favourite person to talk to ❤️", "You make my day better 🌸",
+            "You make my heart smile 🥹", "You are always special to me 🫶", "You are impossible to replace 🤍", "You are one of a kind ✨", "You make everything feel better ❤️",
+            "You are precious to me 🥹", "You make me grateful 🌷", "You make me believe in us 🫶", "You make me smile for no reason 😊", "Because you are YOU, and that's enough for me. ❤️🫂"
+        ];
+        let reasonIdx = 0;
+        function revealReason() {
+            document.getElementById('reason-text').innerText = `${reasonIdx + 1}. ${reasons[reasonIdx]}`;
+            reasonIdx++;
+            if (reasonIdx >= reasons.length) {
+                reasonIdx = 0;
+                document.getElementById('jar-next-btn').style.display = 'block';
+            }
+        }
+
+        // 8. PIN Vault
+        function unlockVault() {
+            const pin = document.getElementById('pin-field').value;
+            const msg = document.getElementById('pin-msg');
+            if (pin === "2202") {
+                confetti({ particleCount: 120, spread: 80 });
+                nextScreen(9);
+            } else {
+                msg.innerText = "Hmm… PIN match nahi hoya 😜 Try again ❤️";
+            }
+        }
+
+        // 9. Photo Memories Logic (1 to 9)
+        const memories = [
+            { img: "assets/photo1.jpg", text: "Ik chhoti jehi memory… par smile bahut vaddi. 🥹❤️" },
+            { img: "assets/photo2.jpg", text: "Eh pal humesha mere dil de nede rahega. ✨" },
+            { img: "assets/photo3.jpg", text: "Teri eh wali smile sab toh best aa. 😊❤️" },
+            { img: "assets/photo4.jpg", text: "Thodi jehi bak-bak te bohot saari masti! 😜" },
+            { img: "assets/photo5.jpg", text: "Har photo vich tu hor vi sohni lagdi ae. 🌸" },
+            { img: "assets/photo6.jpg", text: "Kujh yaadan kade puraniyan nahi hundiyan. 🤍" },
+            { img: "assets/photo7.jpg", text: "Tere naal bitaya har ek second special aa. 🫶" },
+            { img: "assets/photo8.jpg", text: "Bas eddan hi hamesha hassdi reh. 🥹✨" },
+            { img: "assets/photo9.jpg", text: "Last memory before the final surprise… 🥹🎀" }
+        ];
+        let currentMem = 0;
+
+        function flipCard() {
+            document.getElementById('mem-card').classList.toggle('flipped');
+        }
+
+        function nextMemory() {
+            document.getElementById('mem-card').classList.remove('flipped');
+            currentMem++;
+            if (currentMem < memories.length) {
+                setTimeout(() => {
+                    document.getElementById('mem-counter').innerText = `Memory ${currentMem + 1} of 9`;
+                    document.getElementById('mem-img').src = memories[currentMem].img;
+                    document.getElementById('mem-text').innerText = memories[currentMem].text;
+                }, 300);
+            } else {
+                nextScreen(11);
+            }
+        }
+    </script>
+</body>
+</html>
