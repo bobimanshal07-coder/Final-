@@ -1,843 +1,395 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pa">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#ff5c8a" />
-  <title>Riya's Birthday Love Vault 💗</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Riya ❤️</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --bg-color: #fff0f3;
+            --primary-color: #ff4d6d;
+            --secondary-color: #ff758f;
+            --text-color: #590d22;
+            --card-bg: #ffffff;
+        }
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
 
-  <style>
-    :root{
-      --pink:#ff5c8a;
-      --pink-dark:#ed3f72;
-      --rose:#fff0f5;
-      --text:#30222a;
-      --muted:#7c6971;
-      --white:#fff;
-      --shadow:0 18px 50px rgba(88,34,55,.13);
-      --radius:28px;
-    }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding: 15px;
+        }
 
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      min-height:100vh;
-      font-family:"DM Sans",sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(circle at 15% 10%,rgba(255,170,195,.28),transparent 28%),
-        radial-gradient(circle at 90% 30%,rgba(255,205,220,.25),transparent 28%),
-        linear-gradient(135deg,#fff8fb,#fff0f5 50%,#fff8fb);
-      overflow-x:hidden;
-    }
+        .screen {
+            display: none;
+            width: 100%;
+            max-width: 500px;
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 77, 109, 0.15);
+            text-align: center;
+            position: relative;
+            animation: fadeIn 0.5s ease-in-out;
+        }
 
-    button,input{font:inherit}
-    button{cursor:pointer}
-    .app{
-      width:min(100%,760px);
-      margin:auto;
-      padding:18px 14px 45px;
-    }
+        .screen.active {
+            display: block;
+        }
 
-    .screen{
-      display:none;
-      min-height:calc(100vh - 60px);
-      align-items:center;
-      justify-content:center;
-      padding:18px 0;
-    }
-    .screen.active{display:flex}
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    .card{
-      width:100%;
-      background:rgba(255,255,255,.92);
-      border:1px solid rgba(255,255,255,.9);
-      box-shadow:var(--shadow);
-      border-radius:var(--radius);
-      padding:28px 20px;
-      text-align:center;
-      backdrop-filter:blur(10px);
-    }
+        h1, h2, h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
 
-    .opening-card{padding-top:32px}
-    .monkey{
-      width:min(72vw,300px);
-      max-height:330px;
-      object-fit:contain;
-      display:block;
-      margin:0 auto 10px;
-      border-radius:24px;
-    }
+        p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
 
-    h1,h2,h3,p{margin-top:0}
-    h1,h2{font-family:"Caveat",cursive}
-    h1{font-size:clamp(42px,10vw,68px);line-height:.95;margin-bottom:16px}
-    h2{font-size:clamp(36px,9vw,54px);line-height:1;margin-bottom:14px}
-    h3{font-size:21px;margin-bottom:8px}
-    p{line-height:1.65}
-    .subtitle{color:var(--muted);margin-bottom:18px}
+        .btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(2ff, 77, 109, 0.3);
+            transition: all 0.2s ease;
+            margin-top: 15px;
+            width: 100%;
+        }
 
-    .countdown{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:8px;
-      margin:20px 0 24px;
-    }
-    .time-box{
-      padding:12px 5px;
-      border-radius:18px;
-      background:var(--rose);
-      border:1px solid #ffd7e4;
-    }
-    .time-box b{display:block;font-size:24px}
-    .time-box span{font-size:11px;color:var(--muted)}
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 77, 109, 0.4);
+        }
 
-    .primary-btn,.secondary-btn,.choice-btn,.agree-btn{
-      border:0;
-      border-radius:16px;
-      padding:13px 18px;
-      font-weight:700;
-      transition:transform .16s ease,box-shadow .16s ease,background .16s ease;
-    }
-    .primary-btn{
-      color:#fff;
-      background:linear-gradient(135deg,var(--pink),var(--pink-dark));
-      box-shadow:0 10px 24px rgba(237,63,114,.22);
-    }
-    .secondary-btn{
-      background:#fff0f5;
-      color:var(--pink-dark);
-    }
-    .primary-btn:active,.secondary-btn:active,.choice-btn:active,.agree-btn:active{
-      transform:scale(.97);
-    }
-    .primary-btn:disabled,.secondary-btn:disabled{
-      opacity:.45;
-      cursor:not-allowed;
-      box-shadow:none;
-    }
+        /* Screen 1: Opening */
+        .monkey-img { width: 100px; height: 100px; object-fit: contain; margin-bottom: 10px; }
+        .timer-box { display: flex; justify-content: space-around; margin: 20px 0; }
+        .time-unit { background: #fff0f3; padding: 10px; border-radius: 10px; min-width: 65px; }
+        .time-unit span { display: block; font-size: 1.4rem; font-weight: bold; color: var(--primary-color); }
+        .time-unit label { font-size: 0.75rem; }
 
-    .gate{
-      display:grid;
-      gap:10px;
-      margin:18px auto;
-      max-width:420px;
-    }
-    .choice-btn{
-      background:#fff;
-      border:1px solid #ffd4e2;
-      color:var(--text);
-    }
-    .choice-btn.correct{
-      background:#ffe4ee;
-      border-color:var(--pink);
-    }
+        /* Screen 3: Quiz */
+        .quiz-opt { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+        .opt-btn { background: #f8f9fa; border: 2px solid #ffccd5; padding: 12px; border-radius: 12px; cursor: pointer; font-weight: 600; }
+        .opt-btn:hover { background: #ffccd5; }
 
-    .popup{
-      display:none;
-      margin:14px auto 0;
-      padding:12px 14px;
-      max-width:460px;
-      border-radius:15px;
-      background:#fff0f5;
-      color:#9d2852;
-      font-weight:600;
-    }
-    .popup.show{display:block}
+        /* Screen 4: Promises */
+        .promise-list { text-align: left; margin: 15px 0; }
+        .promise-item { background: #fff0f3; padding: 12px; border-radius: 10px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px; }
+        .promise-item input { margin-top: 4px; accent-color: var(--primary-color); transform: scale(1.2); }
+        
+        /* Signature Canvas */
+        #sig-canvas { border: 2px dashed var(--primary-color); border-radius: 10px; background: #fff; cursor: crosshair; touch-action: none; margin-top: 10px; }
 
-    .promise-list{
-      display:grid;
-      gap:12px;
-      margin:20px 0;
-      text-align:left;
-    }
-    .promise{
-      padding:16px;
-      border-radius:20px;
-      background:#fff8fb;
-      border:1px solid #ffe0e9;
-    }
-    .promise-top{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      margin-bottom:7px;
-    }
-    .promise input{
-      width:20px;
-      height:20px;
-      accent-color:var(--pink);
-      flex:none;
-    }
-    .promise p{font-size:14px;color:var(--muted);margin:0 0 0 30px}
+        /* Screen 5: Agreement View */
+        .agreement-paper { background: #fff9fa; border: 2px solid #ffb3c1; padding: 15px; border-radius: 10px; text-align: left; font-size: 0.85rem; }
 
-    .jar-wrap{margin:20px auto}
-    .jar{
-      width:150px;
-      height:180px;
-      margin:auto;
-      border:7px solid #ffadc6;
-      border-top:18px solid #f98bab;
-      border-radius:30px 30px 42px 42px;
-      background:linear-gradient(160deg,rgba(255,255,255,.8),rgba(255,208,224,.55));
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:68px;
-      box-shadow:inset 0 0 30px rgba(255,255,255,.8),0 16px 35px rgba(90,30,55,.12);
-      user-select:none;
-      touch-action:manipulation;
-    }
-    .jar:active{transform:scale(.97)}
-    .reason{
-      min-height:80px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:16px;
-      border-radius:20px;
-      background:#fff8fb;
-      color:#8e3655;
-      font-weight:600;
-    }
+        /* Screen 6: Jar */
+        .jar-container { font-size: 80px; cursor: pointer; user-select: none; transition: transform 0.1s; }
+        .jar-container:active { transform: scale(0.9); }
+        .rain-box { min-height: 120px; background: #fff0f3; border-radius: 10px; padding: 15px; margin: 15px 0; display: flex; align-items: center; justify-content: center; font-weight: 600; color: var(--primary-color); }
 
-    .future-box{
-      padding:22px 16px;
-      border-radius:24px;
-      background:linear-gradient(145deg,#fff1f6,#fff);
-      border:1px solid #ffdce7;
-      font-size:18px;
-    }
+        /* Screen 8: Vault */
+        .pin-input { width: 120px; font-size: 1.8rem; text-align: center; letter-spacing: 8px; padding: 8px; border: 2px solid var(--primary-color); border-radius: 10px; outline: none; margin: 15px 0; }
 
-    .signature-wrap{margin-top:18px}
-    canvas{
-      width:100%;
-      height:210px;
-      background:#fff;
-      border:2px dashed #ffc2d4;
-      border-radius:20px;
-      touch-action:none;
-      display:block;
-    }
-    .small-note{font-size:12px;color:var(--muted);margin:9px 0}
+        /* Screen 9: Memories Flip Card */
+        .card-container { perspective: 1000px; width: 100%; height: 320px; margin: 15px 0; }
+        .flip-card { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.6s; cursor: pointer; }
+        .flip-card.flipped { transform: rotateY(180deg); }
+        .card-front, .card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 15px; overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .card-front img { width: 100%; height: 100%; object-fit: cover; }
+        .card-back { background: #fff0f3; color: var(--text-color); transform: rotateY(180deg); padding: 20px; border: 2px solid var(--primary-color); font-weight: 600; }
 
-    .pin-box{
-      max-width:330px;
-      margin:20px auto;
-    }
-    .pin-input{
-      width:100%;
-      text-align:center;
-      letter-spacing:12px;
-      font-size:28px;
-      padding:14px;
-      border:2px solid #ffd2e0;
-      border-radius:17px;
-      outline:none;
-    }
-    .pin-input:focus{border-color:var(--pink)}
+        /* Screen 11: Final Wish */
+        .garland { display: flex; justify-content: space-around; margin-bottom: 15px; overflow: hidden; }
+        .garland img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-color); }
+        .handwritten { font-family: 'Caveat', cursive; font-size: 1.35rem; line-height: 1.5; text-align: left; background: #fff9fa; padding: 15px; border-radius: 10px; border-left: 4px solid var(--primary-color); margin: 15px 0; }
 
-    .memory-card{perspective:1000px;margin:18px auto}
-    .memory-inner{
-      position:relative;
-      width:100%;
-      min-height:420px;
-      transition:transform .45s ease;
-      transform-style:preserve-3d;
-    }
-    .memory-card.flipped .memory-inner{transform:rotateY(180deg)}
-    .memory-face{
-      position:absolute;
-      inset:0;
-      backface-visibility:hidden;
-      border-radius:26px;
-      overflow:hidden;
-      background:#fff;
-      box-shadow:0 15px 40px rgba(70,25,45,.12);
-    }
-    .memory-face img{
-      width:100%;
-      height:420px;
-      display:block;
-      object-fit:cover;
-    }
-    .memory-back{
-      transform:rotateY(180deg);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:28px;
-      background:linear-gradient(145deg,#fff0f5,#fff);
-    }
-    .memory-back p{
-      font-family:"Caveat",cursive;
-      font-size:32px;
-      line-height:1.15;
-      color:#a72f59;
-    }
-    .memory-tip{color:var(--muted);font-size:13px}
-    .memory-next{margin-top:15px}
-
-    .final-photo{
-      width:100%;
-      max-height:500px;
-      object-fit:cover;
-      border-radius:25px;
-      box-shadow:0 15px 40px rgba(80,25,50,.14);
-      margin:12px 0 20px;
-    }
-
-    audio{
-      width:100%;
-      margin:20px 0;
-    }
-
-    .gift{
-      padding:22px;
-      border-radius:25px;
-      background:#fff7fa;
-      border:1px solid #ffd8e5;
-    }
-    .gift-icon{
-      font-size:72px;
-      margin:8px 0 12px;
-    }
-    .gift-message{
-      font-family:"Caveat",cursive;
-      font-size:31px;
-      color:#a62e58;
-      line-height:1.1;
-    }
-
-    .progress{
-      color:var(--muted);
-      font-size:13px;
-      margin-bottom:6px;
-    }
-    .hidden{display:none!important}
-
-    .confetti{
-      position:fixed;
-      top:-20px;
-      left:0;
-      width:9px;
-      height:14px;
-      pointer-events:none;
-      z-index:9999;
-      animation:fall 1.7s ease-in forwards;
-    }
-    @keyframes fall{
-      to{transform:translate3d(var(--x),105vh,0) rotate(720deg);opacity:0}
-    }
-
-    @media (max-width:480px){
-      .app{padding:10px 10px 35px}
-      .card{padding:24px 15px;border-radius:24px}
-      .monkey{max-height:280px}
-      .memory-inner,.memory-face img{min-height:360px;height:360px}
-      .memory-back p{font-size:29px}
-      .countdown{gap:6px}
-      .time-box b{font-size:21px}
-    }
-  </style>
+        /* Screen 12: Audio */
+        .profile-header { display: flex; align-items: center; gap: 15px; text-align: left; margin-bottom: 20px; }
+        .dp-img { width: 75px; height: 75px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary-color); }
+        audio { width: 100%; margin: 20px 0; }
+    </style>
 </head>
-
 <body>
-<main class="app">
 
-  <!-- 1. Opening -->
-  <section id="opening" class="screen active">
-    <div class="card opening-card">
-      <img src="assets/monkey.png" alt="Cute monkey holding a birthday message" class="monkey"
-           onerror="this.style.display='none'">
-      <h1>For You 💌❤️</h1>
-      <p class="subtitle">A little surprise made with lots of love &amp; smiles 🐒💗</p>
-
-      <div class="countdown" aria-label="Countdown to birthday">
-        <div class="time-box"><b id="days">0</b><span>Days</span></div>
-        <div class="time-box"><b id="hours">0</b><span>Hours</span></div>
-        <div class="time-box"><b id="minutes">0</b><span>Minutes</span></div>
-        <div class="time-box"><b id="seconds">0</b><span>Seconds</span></div>
-      </div>
-
-      <button class="primary-btn" onclick="goTo('welcome')">Open Your Surprise ✨</button>
-    </div>
-  </section>
-
-  <!-- 2. Welcome -->
-  <section id="welcome" class="screen">
-    <div class="card">
-      <h2>Happy Birthday, Meri Jaan Riya ❤️✨</h2>
-      <p>
-        Ajj da din sirf tere naam… 🌷<br>
-        Bas hamesha khush te hassdi rave.<br>
-        You deserve all the happiness in the world. 🤍
-      </p>
-      <p class="subtitle">Welcome to your little surprise… 🎀</p>
-      <button class="primary-btn" onclick="goTo('nickname')">Enter the Secret Vault 🔐</button>
-    </div>
-  </section>
-
-  <!-- 3. Nickname Gate -->
-  <section id="nickname" class="screen">
-    <div class="card">
-      <h2>Nickname Gate 🐒</h2>
-      <p>Only the real one knows this… 😜❤️</p>
-      <div class="gate">
-        <button class="choice-btn" onclick="checkNickname(this,'Bandri')">Bandri 🐒😂</button>
-        <button class="choice-btn" onclick="checkNickname(this,'Princess')">Princess 👑</button>
-        <button class="choice-btn" onclick="checkNickname(this,'Cutie')">Cutie 🥰</button>
-      </div>
-      <div id="nicknamePopup" class="popup">Ohooo! Galat answer 😜😂<br>Chal hun sahi nickname choose kar, Bandri 🐒❤️</div>
-      <button id="nicknameNext" class="primary-btn hidden" onclick="goTo('agreement')">Unlock 🔓</button>
-    </div>
-  </section>
-
-  <!-- 4. Lifetime Agreement -->
-  <section id="agreement" class="screen">
-    <div class="card">
-      <h2>Lifetime Agreement 💗</h2>
-      <p>Ik chhota jeha agreement aa… answer jo marzi hove 😜</p>
-      <div class="promise">
-        <h3>Will you enter this little vault? 🔐</h3>
-        <p>There is only one rule: keep smiling. 🫶</p>
-      </div>
-      <p class="subtitle">Answer jo vi hove… permission taan teri hi aa 😜💗</p>
-      <button class="primary-btn" onclick="goTo('promises')">I Agree 💗</button>
-    </div>
-  </section>
-
-  <!-- 5. Promises -->
-  <section id="promises" class="screen">
-    <div class="card">
-      <h2>5 Little Promises 🥹❤️</h2>
-      <p class="subtitle">Saare agree karne painge, Bandri ji 😌</p>
-
-      <div class="promise-list">
-        <label class="promise">
-          <div class="promise-top"><input type="checkbox" class="promise-check"> <strong>😤 Gussa Policy</strong></div>
-          <p>Kinna vi gussa hove, par gall karni kade nahi chhadni. ❤️</p>
-        </label>
-
-        <label class="promise">
-          <div class="promise-top"><input type="checkbox" class="promise-check"> <strong>🗣️ Communication First</strong></div>
-          <p>Je kade misunderstanding hove, taan dovein kathe baith ke pyaar naal solve karaange. 🫶</p>
-        </label>
-
-        <label class="promise">
-          <div class="promise-top"><input type="checkbox" class="promise-check"> <strong>😊 Daily Smile Mandate</strong></div>
-          <p>Smile karni compulsory aa… chahe din kinna vi weird kyon na hove! 😚✨</p>
-        </label>
-
-        <label class="promise">
-          <div class="promise-top"><input type="checkbox" class="promise-check"> <strong>🌷 Self-Care Promise</strong></div>
-          <p>Apna khayal har haal vich rakhengi… kyunki tu important aa. 🥹❤️</p>
-        </label>
-
-        <label class="promise">
-          <div class="promise-top"><input type="checkbox" class="promise-check"> <strong>🥺 Forgiveness Clause</strong></div>
-          <p>Main thoda jeha na-samajh aan 😭😂… je kade koi galti ho jave, taan maaf kar dengi na? 🥹❤️</p>
-        </label>
-      </div>
-
-      <button id="promisesNext" class="primary-btn" disabled onclick="goTo('jar')">All Agreed 💗</button>
-    </div>
-  </section>
-
-  <!-- 6. Why I Love You Jar -->
-  <section id="jar" class="screen">
-    <div class="card">
-      <h2>Why I Love You Jar 🫙💗</h2>
-      <p class="subtitle">Tap the jar… one little reason at a time 🥹</p>
-
-      <div class="jar-wrap">
-        <div id="jarButton" class="jar" role="button" tabindex="0" aria-label="Tap the jar">💌</div>
-      </div>
-
-      <div id="reason" class="reason">Tap me to reveal a reason… ✨</div>
-      <button id="jarNext" class="primary-btn hidden" onclick="goTo('future')">Next Surprise ✨</button>
-    </div>
-  </section>
-
-  <!-- 7. Future Promise -->
-  <section id="future" class="screen">
-    <div class="card">
-      <h2>A Little Future Promise 🌷</h2>
-      <div class="future-box">
-        Tu apne saare dreams poore karegi… 🥹✨<br><br>
-        te ohna saare dreams vich main vi hamesha tere naal include hona chaunda aan. 🫶❤️<br><br>
-        Bas hamesha khush rehna, apna khayal rakhna te apni smile kade na khona. 🌷💗
-      </div>
-      <button class="primary-btn" style="margin-top:20px" onclick="goTo('signature')">Continue 🫶</button>
-    </div>
-  </section>
-
-  <!-- 8. Signature -->
-  <section id="signature" class="screen">
-    <div class="card">
-      <h2>Sign Your Little Promise ✍️💗</h2>
-      <p class="subtitle">Mouse ya finger naal apna signature banao.</p>
-
-      <div class="signature-wrap">
-        <canvas id="signatureCanvas"></canvas>
-        <p class="small-note">Draw inside the box, then lock it 🔒</p>
-        <button class="secondary-btn" onclick="clearSignature()">Clear</button>
-        <button id="lockSignature" class="primary-btn" onclick="lockSignature()">Lock Signature 🔒</button>
-      </div>
-
-      <button id="signatureNext" class="primary-btn hidden" style="margin-top:15px" onclick="goTo('vault')">Continue to Secret Vault 🔐</button>
-    </div>
-  </section>
-
-  <!-- 9. Secret Love Vault -->
-  <section id="vault" class="screen">
-    <div class="card">
-      <h2>Secret Love Vault 🔐❤️</h2>
-      <p>Hint: <em>Tuhade favourite person di birthday date 😉🎂❤️</em></p>
-
-      <div class="pin-box">
-        <input id="pinInput" class="pin-input" type="password" inputmode="numeric" maxlength="4"
-               placeholder="••••" aria-label="Vault PIN">
-      </div>
-
-      <button class="primary-btn" onclick="unlockVault()">Unlock 🔓</button>
-      <div id="pinPopup" class="popup">Hmm… PIN match nahi hoya 😜 Try again ❤️</div>
-    </div>
-  </section>
-
-  <!-- 10. Memories: ALL PHOTOS TOGETHER -->
-  <section id="memories" class="screen">
-    <div class="card">
-      <h2>Our Little Memories 📸❤️</h2>
-      <p class="subtitle">One photo at a time… tap the memory to flip it 💗</p>
-      <div id="memoryProgress" class="progress">Memory 1 of 9</div>
-
-      <div id="memoryCard" class="memory-card">
-        <div class="memory-inner">
-          <div class="memory-face">
-            <img id="memoryImage" src="assets/photo1.jpg" alt="Memory photo 1">
-          </div>
-          <div class="memory-face memory-back">
-            <p id="memoryText">Some memories are small moments that become the biggest smiles. 🥹❤️</p>
-          </div>
+    <!-- 1️⃣ Opening Screen -->
+    <div id="screen1" class="screen active">
+        <img src="assets/monkey.png" alt="Monkey" class="monkey-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/616/616430.png'">
+        <h2>For You 💌❤️</h2>
+        <div class="timer-box">
+            <div class="time-unit"><span id="days">00</span><label>Days</label></div>
+            <div class="time-unit"><span id="hours">00</span><label>Hours</label></div>
+            <div class="time-unit"><span id="mins">00</span><label>Minutes</label></div>
+            <div class="time-unit"><span id="secs">00</span><label>Seconds</label></div>
         </div>
-      </div>
-
-      <p id="memoryTip" class="memory-tip">Tap the photo to reveal the memory note ✨</p>
-      <button id="memoryNext" class="primary-btn memory-next hidden" onclick="nextMemory()">Next Memory ➜</button>
+        <button class="btn" onclick="nextScreen(2)">Open Your Surprise ✨</button>
     </div>
-  </section>
 
-  <!-- 11. Final Wish -->
-  <section id="finalWish" class="screen">
-    <div class="card">
-      <h2>One Last Wish For You 🎂💗</h2>
-      <img src="assets/photo10.jpg" alt="Special birthday memory" class="final-photo"
-           onerror="this.style.display='none'">
-      <p>
-        Happy Birthday once again, Riya! 🥹❤️<br><br>
-        Rabb kare tu hamesha eddan hi hassdi reh, khush reh te life nu apne tareeke naal enjoy kardi reh. 🫶<br><br>
-        Tere saare dreams poore hon, te life ch jinni happiness tu deserve kardi aa,
-        oh sab tere kol hamesha bani rahe. 🌷✨
-      </p>
-      <p style="font-family:'Caveat',cursive;font-size:31px;color:#a72f59">
-        Bas hamesha khush te smile kardi rehna, Bandri 🐒❤️
-      </p>
-      <button class="primary-btn" onclick="goTo('audio')">A Little Something 🎧</button>
+    <!-- 2️⃣ Welcome -->
+    <div id="screen2" class="screen">
+        <h2>Happy Birthday, Meri Jaan Riya ❤️✨</h2>
+        <p>Ajj da din sirf tere naam… 🌷</p>
+        <p>Bas hamesha khush te hassdi rave.</p>
+        <p>You deserve all the happiness in the world. 🤍</p>
+        <p>Welcome to your little surprise… 🎀</p>
+        <button class="btn" onclick="nextScreen(3)">Enter the Secret Vault 🔐</button>
     </div>
-  </section>
 
-  <!-- 12. Final Audio -->
-  <section id="audio" class="screen">
-    <div class="card">
-      <h2>For You, With Love 🎧❤️</h2>
-      <p class="subtitle">A final little surprise… press play when you're ready 🥹</p>
-
-      <audio id="finalAudio" controls preload="metadata">
-        <source src="assets/final-surprise.mp3" type="audio/mpeg">
-        Your browser does not support audio.
-      </audio>
-
-      <button class="primary-btn" onclick="goTo('gift')">Next Surprise 🎁</button>
+    <!-- 3️⃣ Nickname Gate -->
+    <div id="screen3" class="screen">
+        <h2>Only the real one knows this… 😜❤️</h2>
+        <p>And tuci irritate v hunde oo 🤭</p>
+        <div class="quiz-opt">
+            <button class="opt-btn" onclick="checkNickname(false)">Princess 👑</button>
+            <button class="opt-btn" onclick="checkNickname(true)">Bandri 🐒😂</button>
+            <button class="opt-btn" onclick="checkNickname(false)">Cutie 🥰</button>
+        </div>
+        <p id="quiz-msg" style="margin-top: 15px; font-weight: bold; color: var(--primary-color);"></p>
+        <button id="quiz-unlock-btn" class="btn" style="display:none;" onclick="nextScreen(4)">Unlock 🔓</button>
     </div>
-  </section>
 
-  <!-- 13. 2027 Gift Mystery -->
-  <section id="gift" class="screen">
-    <div class="card">
-      <div class="gift">
-        <div class="gift-icon">🎁</div>
+    <!-- 4️⃣ 5 Little Promises -->
+    <div id="screen4" class="screen">
+        <h2>5 Little Promises 🥹❤️</h2>
+        <div class="promise-list">
+            <div class="promise-item"><input type="checkbox" class="p-check" onchange="checkPromises()"><p><b>😤 Gussa Policy:</b> Kinna vi gussa hove, par gall karni kade nahi chhadni. ❤️</p></div>
+            <div class="promise-item"><input type="checkbox" class="p-check" onchange="checkPromises()"><p><b>🗣️ Communication First:</b> Je kade misunderstanding hove, taan dovein kathe baith ke pyaar naal solve karaange. 🫶</p></div>
+            <div class="promise-item"><input type="checkbox" class="p-check" onchange="checkPromises()"><p><b>😊 Daily Smile Mandate:</b> Smile karni compulsory aa… chahe din kinna vi weird kyon na hove! 😚✨</p></div>
+            <div class="promise-item"><input type="checkbox" class="p-check" onchange="checkPromises()"><p><b>🌷 Self-Care Promise:</b> Apna khayal har haal vich rakhengi… kyunki tu important aa. 🥹❤️</p></div>
+            <div class="promise-item"><input type="checkbox" class="p-check" onchange="checkPromises()"><p><b>🥺 Forgiveness Clause:</b> Main thoda jeha na-samajh aan 😭😂… je kade koi galti ho jave, taan maaf kar dengi na? 🥹❤️</p></div>
+        </div>
+        <p id="all-agreed-text" style="display:none; font-weight:bold; color: green;">All Agreed 💗</p>
+
+        <div id="sig-section" style="display:none; margin-top: 15px;">
+            <h3>Sign Your Little Promise ✍️💗</h3>
+            <p style="font-size:0.8rem;">Mouse ya finger naal apna signature banao.</p>
+            <canvas id="sig-canvas" width="300" height="120"></canvas>
+            <div style="display:flex; gap:10px;">
+                <button class="btn" style="background:#6c757d;" onclick="clearCanvas()">Clear</button>
+                <button class="btn" onclick="lockSignature()">Lock Signature 🔒</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5️⃣ Agreement Paper Frame -->
+    <div id="screen5" class="screen">
+        <h2>Promise Agreement Paper 📜💗</h2>
+        <div class="agreement-paper">
+            <p>✔ Kinna vi gussa hove, gall karni kade nahi chhadni.</p>
+            <p>✔ Misunderstanding kathe baith ke solve karaange.</p>
+            <p>✔ Daily Smile compulsory aa!</p>
+            <p>✔ Apna khayal har haal vich rakhengi.</p>
+            <p>✔ Galti hon te maaf kar dengi.</p>
+            <br>
+            <p><b>Signed By:</b> Riya (Bandri 🐒)</p>
+            <img id="saved-sig" style="width:100%; max-height:80px; object-fit:contain; border-bottom: 2px solid var(--primary-color);" />
+        </div>
+        <button class="btn" onclick="nextScreen(6)">Continue ✨</button>
+    </div>
+
+    <!-- 6️⃣ Why I Love You Jar -->
+    <div id="screen6" class="screen">
+        <h2>Why I Love You Jar 🫙💗</h2>
+        <p>Tap the jar to reveal reasons! ✨</p>
+        <div class="jar-container" onclick="revealReason()">🫙</div>
+        <div class="rain-box" id="reason-text">Tap the Jar! 👇</div>
+        <button id="jar-next-btn" class="btn" style="display:none;" onclick="nextScreen(7)">Next Surprise ✨</button>
+    </div>
+
+    <!-- 7️⃣ Transition Gate -->
+    <div id="screen7" class="screen">
+        <h2>Ready for the Vault? 🔐</h2>
+        <p>Your memories and final messages are locked inside!</p>
+        <button class="btn" onclick="nextScreen(8)">Continue to Secret Vault 🔐</button>
+    </div>
+
+    <!-- 8️⃣ Secret Love Vault -->
+    <div id="screen8" class="screen">
+        <h2>Secret Love Vault 🔐❤️</h2>
+        <p style="font-size:0.85rem;">Hint: Tuhade favourite person di birthday date 😉🎂❤️</p>
+        <input type="number" id="pin-field" class="pin-input" placeholder="****" min="1000" max="9999">
+        <p id="pin-msg" style="color:var(--primary-color); font-weight:bold;"></p>
+        <button class="btn" onclick="unlockVault()">Unlock Vault 🔓</button>
+    </div>
+
+    <!-- 📸 0️⃣8️⃣ Memories Section (1 to 9) -->
+    <div id="screen9" class="screen">
+        <p id="mem-counter" style="font-size:0.85rem; font-weight:600; color:var(--primary-color);">Memory 1 of 9</p>
+        <div class="card-container" onclick="flipCard()">
+            <div class="flip-card" id="mem-card">
+                <div class="card-front">
+                    <img id="mem-img" src="assets/photo1.jpg" alt="Memory" onerror="this.src='https://via.placeholder.com/400x300?text=Photo+1'">
+                </div>
+                <div class="card-back" id="mem-text">
+                    Ik chhoti jehi memory… par smile bahut vaddi. 🥹❤️
+                </div>
+            </div>
+        </div>
+        <p style="font-size:0.75rem; color:#888;">(Tap photo to flip 🔄)</p>
+        <button class="btn" onclick="nextMemory()">Next Memory ➜</button>
+    </div>
+
+    <!-- 🎂 1️⃣1️⃣ Final Wish -->
+    <div id="screen11" class="screen">
+        <!-- Garland decoration using photos 1 to 9 -->
+        <div class="garland">
+            <img src="assets/photo1.jpg" onerror="this.src='https://via.placeholder.com/50'">
+            <img src="assets/photo2.jpg" onerror="this.src='https://via.placeholder.com/50'">
+            <img src="assets/photo3.jpg" onerror="this.src='https://via.placeholder.com/50'">
+            <img src="assets/photo4.jpg" onerror="this.src='https://via.placeholder.com/50'">
+            <img src="assets/photo5.jpg" onerror="this.src='https://via.placeholder.com/50'">
+        </div>
+        <h2>One Last Wish For You 🎂💗</h2>
+        <div class="handwritten">
+            Happy Birthday once again, Meri Jaan Riya 🎂❤️<br><br>
+            Rabb kare tu hamesha eddan hi hassdi reh, khush reh te life nu apne tareeke naal enjoy kardi reh. 🫶🏻✨<br><br>
+            Tere dreams menu honestly ni pta 🤭 par jo vi ne, saare poore hon. ❤️ Te haan… ohna ch menu chhad ke hor sab kuchh mil jaave, eh taan bilkul ni hona 😂🤭 Thodi jehi jagah mere layi vi rakh lavi.<br><br>
+            Eh chhota jeha surprise bas tere layi, sirf tere chehre te smile dekhan layi. 💗<br><br>
+            Bas hamesha khush reh, hassdi reh te apni sohni jehi smile kade na khona. ✨<br><br>
+            Happy Birthday once again, Riya! 🎂❤️ Rabb kare aun wala har din hor vi sohnaa hove. 🌷<br><br>
+            Made with memories, thodi masti te bohot saara dil… sirf tere layi. 🐒❤️<br><br>
+            <b>Bas hamesha khush te smile kardi rehna, Bandri 🐒❤️</b>
+        </div>
+        <button class="btn" onclick="nextScreen(12)">A Little Something 🎧</button>
+    </div>
+
+    <!-- 🎧 1️⃣2️⃣ Final Audio -->
+    <div id="screen12" class="screen">
+        <div class="profile-header">
+            <img src="assets/photo10.jpg" class="dp-img" alt="Riya DP" onerror="this.src='https://via.placeholder.com/100'">
+            <div>
+                <h3>For You, With Love 🎧❤️</h3>
+                <p style="font-size:0.8rem; margin:0;">A final little surprise… press play when you're ready 🥹</p>
+            </div>
+        </div>
+        <audio controls>
+            <source src="assets/final-surprise.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <button class="btn" onclick="nextScreen(13)">Next Surprise 🎁</button>
+    </div>
+
+    <!-- 🎁 1️⃣3️⃣ 2027 Gift Mystery -->
+    <div id="screen13" class="screen">
+        <div style="font-size:70px; margin-bottom:10px;">🎁</div>
         <h2>2027 Gift Mystery 👀✨</h2>
-        <p class="gift-message">
-          2027 ch ik hor surprise tera wait kar reha aa… 😜❤️
-        </p>
-        <p>
-          Hun bas eh secret locked aa 🔒<br>
-          Time aunde hi reveal hovega. 🫶
-        </p>
-        <p style="font-weight:700">Until then… keep smiling, Bandri 🐒💗</p>
-      </div>
+        <p>2027 ch ik hor surprise tera wait kar reha aa… 😜❤️</p>
+        <p>Hun bas eh secret locked aa 🔒<br>Time aunde hi reveal hovega. 🫶</p>
+        <p style="font-weight: bold; color: var(--primary-color); margin-top:20px;">Until then… keep smiling, Bandri 🐒💗</p>
     </div>
-  </section>
 
-</main>
+    <script>
+        // 1. Navigation Flow
+        function nextScreen(screenNum) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('screen' + screenNum).classList.add('active');
+            window.scrollTo(0, 0);
+        }
 
-<script>
-  const BIRTHDAY = new Date("2026-09-16T00:00:00+05:30").getTime();
+        // Countdown Timer (Defaulting to Sept 16)
+        const targetDate = new Date("Sept 16, 2026 00:00:00").getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+            if (diff > 0) {
+                document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+                document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById('secs').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+            }
+        }, 1000);
 
-  function updateCountdown(){
-    const now = Date.now();
-    let diff = BIRTHDAY - now;
-    if(diff < 0) diff = 0;
+        // 3. Quiz Logic
+        function checkNickname(isCorrect) {
+            const msg = document.getElementById('quiz-msg');
+            const unlockBtn = document.getElementById('quiz-unlock-btn');
+            if (isCorrect) {
+                msg.innerText = "Sahi pakde hai! 🎉❤️";
+                msg.style.color = "green";
+                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                unlockBtn.style.display = 'block';
+            } else {
+                msg.innerText = "Ohooo! Galat answer 😜😂 Chal hun sahi nickname choose kar, Bandri 🐒❤️";
+                msg.style.color = "var(--primary-color)";
+                unlockBtn.style.display = 'none';
+            }
+        }
 
-    const day = 24*60*60*1000;
-    const hour = 60*60*1000;
-    const minute = 60*1000;
+        // 4. Promises & Canvas Signature
+        function checkPromises() {
+            const checks = document.querySelectorAll('.p-check');
+            const allChecked = Array.from(checks).every(c => c.checked);
+            if (allChecked) {
+                document.getElementById('all-agreed-text').style.display = 'block';
+                document.getElementById('sig-section').style.display = 'block';
+                initCanvas();
+            }
+        }
 
-    document.getElementById("days").textContent = Math.floor(diff/day);
-    diff %= day;
-    document.getElementById("hours").textContent = Math.floor(diff/hour);
-    diff %= hour;
-    document.getElementById("minutes").textContent = Math.floor(diff/minute);
-    diff %= minute;
-    document.getElementById("seconds").textContent = Math.floor(diff/1000);
-  }
-  updateCountdown();
-  setInterval(updateCountdown,1000);
+        let canvas, ctx, drawing = false;
+        function initCanvas() {
+            canvas = document.getElementById('sig-canvas');
+            ctx = canvas.getContext('2d');
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = '#ff4d6d';
 
-  function goTo(id){
-    document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-    const target = document.getElementById(id);
-    if(target) target.classList.add("active");
-    window.scrollTo({top:0,behavior:"smooth"});
+            function getPos(e) {
+                const rect = canvas.getBoundingClientRect();
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                return { x: clientX - rect.left, y: clientY - rect.top };
+            }
 
-    if(id === "memories") initMemories();
-    if(id === "signature") setTimeout(resizeCanvas,50);
-  }
+            function startDraw(e) { drawing = true; const pos = getPos(e); ctx.beginPath(); ctx.moveTo(pos.x, pos.y); }
+            function draw(e) { if (!drawing) return; const pos = getPos(e); ctx.lineTo(pos.x, pos.y); ctx.stroke(); }
+            function stopDraw() { drawing = false; }
 
-  // Nickname Gate
-  function checkNickname(button,answer){
-    const popup = document.getElementById("nicknamePopup");
-    const next = document.getElementById("nicknameNext");
+            canvas.addEventListener('mousedown', startDraw);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', stopDraw);
 
-    if(answer === "Bandri"){
-      button.classList.add("correct");
-      popup.classList.remove("show");
-      next.classList.remove("hidden");
-      confetti();
-    }else{
-      popup.classList.add("show");
-      button.animate(
-        [{transform:"translateX(-5px)"},{transform:"translateX(5px)"},{transform:"translateX(0)"}],
-        {duration:260}
-      );
-    }
-  }
+            canvas.addEventListener('touchstart', startDraw);
+            canvas.addEventListener('touchmove', draw);
+            canvas.addEventListener('touchend', stopDraw);
+        }
 
-  // Promises
-  const promiseChecks = [...document.querySelectorAll(".promise-check")];
-  const promisesNext = document.getElementById("promisesNext");
-  promiseChecks.forEach(c => c.addEventListener("change",()=>{
-    promisesNext.disabled = !promiseChecks.every(x=>x.checked);
-  }));
+        function clearCanvas() { ctx.clearRect(0, 0, canvas.width, canvas.height); }
 
-  // Why I Love You Jar
-  const reasons = [
-    "Teri smile sach ch poora mood better kar dindi aa. 😊❤️",
-    "Tu apne tareeke naal bilkul special aa. 🫶",
-    "Tere naal chhotiyaan gallan vi yaadgaar lagdiyan ne. 🌷",
-    "Teri happiness dekh ke automatically smile aa jandi aa. 🥹",
-    "Tu jinni genuine aa, oh cheez bahut precious aa. 💗",
-    "Bas tu tu hi aa… te eh hi sab ton cute reason aa. 🐒😂❤️"
-  ];
-  let reasonIndex = 0;
-  let jarStarted = false;
+        function lockSignature() {
+            const dataUrl = canvas.toDataURL();
+            document.getElementById('saved-sig').src = dataUrl;
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+            setTimeout(() => nextScreen(5), 1000);
+        }
 
-  function revealReason(){
-    const reason = document.getElementById("reason");
-    if(reasonIndex < reasons.length){
-      reason.textContent = reasons[reasonIndex];
-      reasonIndex++;
-      jarStarted = true;
-      if(reasonIndex >= reasons.length){
-        document.getElementById("jarNext").classList.remove("hidden");
-      }
-    }else{
-      document.getElementById("jarNext").classList.remove("hidden");
-    }
-  }
-  document.getElementById("jarButton").addEventListener("click",revealReason);
-  document.getElementById("jarButton").addEventListener("keydown",e=>{
-    if(e.key==="Enter" || e.key===" ") revealReason();
-  });
-
-  // Signature Canvas
-  const canvas = document.getElementById("signatureCanvas");
-  const ctx = canvas.getContext("2d");
-  let drawing = false;
-  let signatureLocked = false;
-
-  function resizeCanvas(){
-    if(signatureLocked) return;
-    const rect = canvas.getBoundingClientRect();
-    const ratio = Math.max(1,window.devicePixelRatio || 1);
-    canvas.width = Math.round(rect.width * ratio);
-    canvas.height = Math.round(rect.height * ratio);
-    ctx.setTransform(ratio,0,0,ratio,0,0);
-    ctx.lineWidth = 2.5;
-    ctx.lineCap = "round";
-    ctx.lineJoin = "round";
-    ctx.strokeStyle = "#a72f59";
-  }
-  window.addEventListener("resize",resizeCanvas);
-  resizeCanvas();
-
-  function pointerPos(e){
-    const rect = canvas.getBoundingClientRect();
-    return {x:e.clientX-rect.left,y:e.clientY-rect.top};
-  }
-  canvas.addEventListener("pointerdown",e=>{
-    if(signatureLocked)return;
-    drawing=true;
-    canvas.setPointerCapture(e.pointerId);
-    const p=pointerPos(e);
-    ctx.beginPath();
-    ctx.moveTo(p.x,p.y);
-  });
-  canvas.addEventListener("pointermove",e=>{
-    if(!drawing || signatureLocked)return;
-    const p=pointerPos(e);
-    ctx.lineTo(p.x,p.y);
-    ctx.stroke();
-  });
-  ["pointerup","pointercancel","pointerleave"].forEach(type=>{
-    canvas.addEventListener(type,()=>drawing=false);
-  });
-
-  function clearSignature(){
-    if(signatureLocked)return;
-    const ratio=Math.max(1,window.devicePixelRatio || 1);
-    ctx.clearRect(0,0,canvas.width/ratio,canvas.height/ratio);
-  }
-
-  function lockSignature(){
-    if(signatureLocked)return;
-    signatureLocked=true;
-    canvas.style.opacity=".8";
-    document.getElementById("lockSignature").disabled=true;
-    document.getElementById("signatureNext").classList.remove("hidden");
-    confetti();
-  }
-
-  // PIN
-  function unlockVault(){
-    const input=document.getElementById("pinInput");
-    const popup=document.getElementById("pinPopup");
-
-    if(input.value === "2202"){
-      popup.classList.remove("show");
-      confetti();
-      setTimeout(()=>goTo("memories"),450);
-    }else{
-      popup.classList.add("show");
-      input.value="";
-      input.focus();
-    }
-  }
-  document.getElementById("pinInput").addEventListener("keydown",e=>{
-    if(e.key==="Enter") unlockVault();
-  });
-
-  // Memories
-  const memories = [
-    {img:"assets/photo1.jpg", text:"Ik chhoti jehi memory… par smile bahut vaddi. 🥹❤️"},
-    {img:"assets/photo2.jpg", text:"Some moments deserve a permanent place in the heart. 🌷"},
-    {img:"assets/photo3.jpg", text:"This one = instant smile. 😭😂❤️"},
-    {img:"assets/photo4.jpg", text:"Simple moment, beautiful memory. 🫶"},
-    {img:"assets/photo5.jpg", text:"Tere naal judi har memory thodi hor special lagdi aa. 💗"},
-    {img:"assets/photo6.jpg", text:"A little snapshot of a very sweet moment. ✨"},
-    {img:"assets/photo7.jpg", text:"Memory saved… smile unlocked. 😊❤️"},
-    {img:"assets/photo8.jpg", text:"Eh wali memory nu vi vault ch safely rakh lya. 🔐💗"},
-    {img:"assets/photo9.jpg", text:"Last memory before the final surprise… 🥹🎀"}
-  ];
-
-  let memoryIndex=0;
-  let memoryFlipped=false;
-
-  function initMemories(){
-    memoryIndex=0;
-    memoryFlipped=false;
-    renderMemory();
-  }
-
-  function renderMemory(){
-    const item=memories[memoryIndex];
-    const card=document.getElementById("memoryCard");
-    const img=document.getElementById("memoryImage");
-    const text=document.getElementById("memoryText");
-    const progress=document.getElementById("memoryProgress");
-    const next=document.getElementById("memoryNext");
-    const tip=document.getElementById("memoryTip");
-
-    card.classList.remove("flipped");
-    memoryFlipped=false;
-    img.src=item.img;
-    img.alt="Memory photo "+(memoryIndex+1);
-    text.textContent=item.text;
-    progress.textContent=`Memory ${memoryIndex+1} of ${memories.length}`;
-    next.classList.add("hidden");
-    tip.textContent="Tap the photo to reveal the memory note ✨";
-  }
-
-  document.getElementById("memoryCard").addEventListener("click",()=>{
-    if(memoryFlipped)return;
-    memoryFlipped=true;
-    document.getElementById("memoryCard").classList.add("flipped");
-    document.getElementById("memoryTip").textContent =
-      memoryIndex === memories.length-1
-        ? "Last one ❤️ Now continue to the final wish."
-        : "Memory unlocked 💗 Tap Next Memory.";
-    document.getElementById("memoryNext").classList.remove("hidden");
-  });
-
-  function nextMemory(){
-    if(!memoryFlipped)return;
-
-    if(memoryIndex < memories.length-1){
-      memoryIndex++;
-      renderMemory();
-    }else{
-      goTo("finalWish");
-    }
-  }
-
-  // Confetti
-  function confetti(){
-    const pieces=36;
-    for(let i=0;i<pieces;i++){
-      const el=document.createElement("span");
-      el.className="confetti";
-      el.textContent=["💗","✨","🌸","🎀","❤️"][Math.floor(Math.random()*5)];
-      el.style.left=(Math.random()*100)+"vw";
-      el.style.fontSize=(12+Math.random()*12)+"px";
-      el.style.setProperty("--x",(Math.random()*180-90)+"px");
-      el.style.animationDelay=(Math.random()*.35)+"s";
-      document.body.appendChild(el);
-      setTimeout(()=>el.remove(),2300);
-    }
-  }
-
-  // Prevent accidental form submission behavior if this file is embedded later.
-  document.addEventListener("keydown",e=>{
-    if(e.key==="Escape"){
-      document.querySelectorAll(".popup").forEach(p=>p.classList.remove("show"));
-    }
-  });
-</script>
-</body>
-</html>
+        // 6. Reasons Jar Logic
+        const reasons = [
+            "Your smile 😊", "Your cute nature 🫶", "Your caring heart ❤
