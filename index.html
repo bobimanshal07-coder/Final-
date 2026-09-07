@@ -114,7 +114,7 @@
         /* Screen 6: Jar */
         .jar-container { font-size: 80px; cursor: pointer; user-select: none; transition: transform 0.1s; }
         .jar-container:active { transform: scale(0.9); }
-        .rain-box { min-height: 120px; background: #fff0f3; border-radius: 10px; padding: 15px; margin: 15px 0; display: flex; align-items: center; justify-content: center; font-weight: 600; color: var(--primary-color); }
+        .rain-box { min-height: 120px; background: #fff0f3; border-radius: 10px; padding: 15px; margin: 15px 0; display: flex; align-items: center; justify-content: center; font-weight: 600; color: var(--primary-color); transition: all 0.1s ease; }
 
         /* Screen 8: Vault */
         .pin-input { width: 140px; font-size: 1.8rem; text-align: center; letter-spacing: 8px; padding: 8px; border: 2px solid var(--primary-color); border-radius: 10px; outline: none; margin: 15px 0; }
@@ -142,7 +142,7 @@
 
     <!-- 1️⃣ Opening Screen -->
     <div id="screen1" class="screen active">
-        <img src="assets/monkey.png" alt="Cute Monkey" class="monkey-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><text y=\'80\' font-size=\'80\'>🐒</text></svg>'">
+        <img src="assets/monkey.png" alt="Cute Monkey" class="monkey-img">
         <h2>For You 💌❤️</h2>
         <div class="timer-box">
             <div class="time-unit"><span id="days">00</span><label>Days</label></div>
@@ -219,7 +219,7 @@
     <div id="screen6" class="screen">
         <h2>Why I Love You Jar 🫙💗</h2>
         <p>Tap the jar to reveal reasons! ✨</p>
-        <div class="jar-container" onclick="revealReason()">🫙</div>
+        <div class="jar-container" onclick="revealReasonRain()">🫙</div>
         <div class="rain-box" id="reason-text">Tap the Jar! 👇</div>
         <button id="jar-next-btn" class="btn" style="display:none;" onclick="nextScreen(7)">Next Surprise ✨</button>
     </div>
@@ -246,7 +246,7 @@
         <div class="card-container" onclick="flipCard()">
             <div class="flip-card" id="mem-card">
                 <div class="card-front">
-                    <img id="mem-img" src="assets/photo1.jpg" alt="Memory" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'300\' viewBox=\'0 0 400 300\'><rect width=\'100%\' height=\'100%\' fill=\'%23ffccd5\'/><text x=\'50%\' y=\'50%\' fill=\'%23ff4d6d\' font-size=\'20\' dominant-baseline=\'middle\' text-anchor=\'middle\'>Photo Placeholder</text></svg>'">
+                    <img id="mem-img" src="assets/photo1.jpg" alt="Memory">
                 </div>
                 <div class="card-back" id="mem-text">
                     Ik chhoti jehi memory… par smile bahut vaddi. 🥹❤️
@@ -260,11 +260,11 @@
     <!-- 🎂 11 Final Wish -->
     <div id="screen11" class="screen">
         <div class="garland">
-            <img src="assets/photo1.jpg" alt="garland1" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'50\' height=\'50\' viewBox=\'0 0 50 50\'><circle cx=\'25\' cy=\'25\' r=\'25\' fill=\'%23ffccd5\'/></svg>'">
-            <img src="assets/photo2.jpg" alt="garland2" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'50\' height=\'50\' viewBox=\'0 0 50 50\'><circle cx=\'25\' cy=\'25\' r=\'25\' fill=\'%23ffccd5\'/></svg>'">
-            <img src="assets/photo3.jpg" alt="garland3" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'50\' height=\'50\' viewBox=\'0 0 50 50\'><circle cx=\'25\' cy=\'25\' r=\'25\' fill=\'%23ffccd5\'/></svg>'">
-            <img src="assets/photo4.jpg" alt="garland4" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'50\' height=\'50\' viewBox=\'0 0 50 50\'><circle cx=\'25\' cy=\'25\' r=\'25\' fill=\'%23ffccd5\'/></svg>'">
-            <img src="assets/photo5.jpg" alt="garland5" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'50\' height=\'50\' viewBox=\'0 0 50 50\'><circle cx=\'25\' cy=\'25\' r=\'25\' fill=\'%23ffccd5\'/></svg>'">
+            <img src="assets/photo1.jpg" alt="garland1">
+            <img src="assets/photo2.jpg" alt="garland2">
+            <img src="assets/photo3.jpg" alt="garland3">
+            <img src="assets/photo4.jpg" alt="garland4">
+            <img src="assets/photo5.jpg" alt="garland5">
         </div>
         <h2>One Last Wish For You 🎂💗</h2>
         <div class="handwritten">
@@ -283,7 +283,7 @@
     <!-- 🎧 12 Final Audio -->
     <div id="screen12" class="screen">
         <div class="profile-header">
-            <img src="assets/photo10.jpg" class="dp-img" alt="Riya DP" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 100 100\'><circle cx=\'50\' cy=\'50\' r=\'50\' fill=\'%23ffccd5\'/></svg>'">
+            <img src="assets/photo10.jpg" class="dp-img" alt="Riya DP">
             <div>
                 <h3>For You, With Love 🎧❤️</h3>
                 <p style="font-size:0.8rem; margin:0;">A final little surprise… press play when you're ready 🥹</p>
