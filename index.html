@@ -45,7 +45,7 @@
             box-shadow: 0 10px 30px rgba(255, 77, 109, 0.15);
             text-align: center;
             position: relative;
-            animation: fadeIn 0.5s ease-in-out;
+            animation: fadeIn 0.4s ease-in-out;
         }
 
         .screen.active {
@@ -106,7 +106,7 @@
         .promise-item input { margin-top: 4px; accent-color: var(--primary-color); transform: scale(1.2); }
         
         /* Signature Canvas */
-        #sig-canvas { border: 2px dashed var(--primary-color); border-radius: 10px; background: #fff; cursor: crosshair; touch-action: none; margin-top: 10px; }
+        #sig-canvas { border: 2px dashed var(--primary-color); border-radius: 10px; background: #fff; cursor: crosshair; touch-action: none; margin-top: 10px; width: 100%; height: 140px; }
 
         /* Screen 5: Agreement View */
         .agreement-paper { background: #fff9fa; border: 2px solid #ffb3c1; padding: 15px; border-radius: 10px; text-align: left; font-size: 0.85rem; }
@@ -117,7 +117,7 @@
         .rain-box { min-height: 120px; background: #fff0f3; border-radius: 10px; padding: 15px; margin: 15px 0; display: flex; align-items: center; justify-content: center; font-weight: 600; color: var(--primary-color); }
 
         /* Screen 8: Vault */
-        .pin-input { width: 120px; font-size: 1.8rem; text-align: center; letter-spacing: 8px; padding: 8px; border: 2px solid var(--primary-color); border-radius: 10px; outline: none; margin: 15px 0; }
+        .pin-input { width: 140px; font-size: 1.8rem; text-align: center; letter-spacing: 8px; padding: 8px; border: 2px solid var(--primary-color); border-radius: 10px; outline: none; margin: 15px 0; }
 
         /* Screen 9: Memories Flip Card */
         .card-container { perspective: 1000px; width: 100%; height: 320px; margin: 15px 0; }
@@ -129,7 +129,7 @@
 
         /* Screen 11: Final Wish */
         .garland { display: flex; justify-content: space-around; margin-bottom: 15px; overflow: hidden; }
-        .garland img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-color); }
+        .garland img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-color); }
         .handwritten { font-family: 'Caveat', cursive; font-size: 1.35rem; line-height: 1.5; text-align: left; background: #fff9fa; padding: 15px; border-radius: 10px; border-left: 4px solid var(--primary-color); margin: 15px 0; }
 
         /* Screen 12: Audio */
@@ -142,8 +142,7 @@
 
     <!-- 1️⃣ Opening Screen -->
     <div id="screen1" class="screen active">
-        <!-- cute monkey icon as fallback if assets/monkey.png missing -->
-        <img src="assets/monkey.png" alt="Cute Monkey" class="monkey-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1998/1998713.png'">
+        <img src="assets/monkey.png" alt="Cute Monkey" class="monkey-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3069/3069172.png'">
         <h2>For You 💌❤️</h2>
         <div class="timer-box">
             <div class="time-unit"><span id="days">00</span><label>Days</label></div>
@@ -192,7 +191,7 @@
         <div id="sig-section" style="display:none; margin-top: 15px;">
             <h3>Sign Your Little Promise ✍️💗</h3>
             <p style="font-size:0.8rem;">Mouse ya finger naal apna signature banao.</p>
-            <canvas id="sig-canvas" width="300" height="120"></canvas>
+            <canvas id="sig-canvas"></canvas>
             <div style="display:flex; gap:10px;">
                 <button class="btn" style="background:#6c757d;" onclick="clearCanvas()">Clear</button>
                 <button class="btn" onclick="lockSignature()">Lock Signature 🔒</button>
@@ -236,7 +235,7 @@
     <div id="screen8" class="screen">
         <h2>Secret Love Vault 🔐❤️</h2>
         <p style="font-size:0.85rem;">Hint: Tuhade favourite person di birthday date 😉🎂❤️</p>
-        <input type="number" id="pin-field" class="pin-input" placeholder="****" min="1000" max="9999">
+        <input type="number" id="pin-field" class="pin-input" placeholder="****">
         <p id="pin-msg" style="color:var(--primary-color); font-weight:bold;"></p>
         <button class="btn" onclick="unlockVault()">Unlock Vault 🔓</button>
     </div>
@@ -247,7 +246,7 @@
         <div class="card-container" onclick="flipCard()">
             <div class="flip-card" id="mem-card">
                 <div class="card-front">
-                    <img id="mem-img" src="assets/photo1.jpg" alt="Memory" onerror="this.src='https://via.placeholder.com/400x300?text=Photo+1'">
+                    <img id="mem-img" src="assets/photo1.jpg" alt="Memory" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'300\' viewBox=\'0 0 400 300\'><rect width=\'100%\' height=\'100%\' fill=\'%23ffccd5\'/><text x=\'50%\' y=\'50%\' fill=\'%23ff4d6d\' font-size=\'20\' dominant-baseline=\'middle\' text-anchor=\'middle\'>Photo Placeholder</text></svg>'">
                 </div>
                 <div class="card-back" id="mem-text">
                     Ik chhoti jehi memory… par smile bahut vaddi. 🥹❤️
@@ -260,13 +259,12 @@
 
     <!-- 🎂 1️⃣1️⃣ Final Wish -->
     <div id="screen11" class="screen">
-        <!-- Garland decoration using photos 1 to 5 -->
         <div class="garland">
-            <img src="assets/photo1.jpg" onerror="this.src='https://via.placeholder.com/50'">
-            <img src="assets/photo2.jpg" onerror="this.src='https://via.placeholder.com/50'">
-            <img src="assets/photo3.jpg" onerror="this.src='https://via.placeholder.com/50'">
-            <img src="assets/photo4.jpg" onerror="this.src='https://via.placeholder.com/50'">
-            <img src="assets/photo5.jpg" onerror="this.src='https://via.placeholder.com/50'">
+            <img src="assets/photo1.jpg" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'50\' height=\'50\' viewBox=\'0 0 50 50\'><circle cx=\'25\' cy=\'25\' r=\'25\' fill=\'%23ffccd5\'/></svg>'">
+            <img src="assets/photo2.jpg" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'50\' height=\'50\' viewBox=\'0 0 50 50\'><circle cx=\'25\' cy=\'25\' r=\'25\' fill=\'%23ffccd5\'/></svg>'">
+            <img src="assets/photo3.jpg" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'50\' height=\'50\' viewBox=\'0 0 50 50\'><circle cx=\'25\' cy=\'25\' r=\'25\' fill=\'%23ffccd5\'/></svg>'">
+            <img src="assets/photo4.jpg" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'50\' height=\'50\' viewBox=\'0 0 50 50\'><circle cx=\'25\' cy=\'25\' r=\'25\' fill=\'%23ffccd5\'/></svg>'">
+            <img src="assets/photo5.jpg" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'50\' height=\'50\' viewBox=\'0 0 50 50\'><circle cx=\'25\' cy=\'25\' r=\'25\' fill=\'%23ffccd5\'/></svg>'">
         </div>
         <h2>One Last Wish For You 🎂💗</h2>
         <div class="handwritten">
@@ -285,7 +283,7 @@
     <!-- 🎧 1️⃣2️⃣ Final Audio -->
     <div id="screen12" class="screen">
         <div class="profile-header">
-            <img src="assets/photo10.jpg" class="dp-img" alt="Riya DP" onerror="this.src='https://via.placeholder.com/100'">
+            <img src="assets/photo10.jpg" class="dp-img" alt="Riya DP" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 100 100\'><circle cx=\'50\' cy=\'50\' r=\'50\' fill=\'%23ffccd5\'/></svg>'">
             <div>
                 <h3>For You, With Love 🎧❤️</h3>
                 <p style="font-size:0.8rem; margin:0;">A final little surprise… press play when you're ready 🥹</p>
@@ -315,7 +313,7 @@
             window.scrollTo(0, 0);
         }
 
-        // Countdown Timer (Defaulting to Sept 16)
+        // Countdown Timer Target Date
         const targetDate = new Date("Sept 16, 2026 00:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
@@ -344,52 +342,30 @@
             }
         }
 
-        // 4. Promises & Canvas Signature
+        // 4. Promises & Signature Logic
         function checkPromises() {
             const checks = document.querySelectorAll('.p-check');
             const allChecked = Array.from(checks).every(c => c.checked);
             if (allChecked) {
                 document.getElementById('all-agreed-text').style.display = 'block';
                 document.getElementById('sig-section').style.display = 'block';
-                initCanvas();
+                setTimeout(initCanvas, 100);
             }
         }
 
-        let canvas, ctx, drawing = false;
+        let canvas = null, ctx = null, drawing = false;
+
         function initCanvas() {
             canvas = document.getElementById('sig-canvas');
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
             ctx = canvas.getContext('2d');
             ctx.lineWidth = 3;
             ctx.strokeStyle = '#ff4d6d';
+            ctx.lineCap = 'round';
 
             function getPos(e) {
                 const rect = canvas.getBoundingClientRect();
                 const clientX = e.touches ? e.touches[0].clientX : e.clientX;
                 const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-                return { x: clientX - rect.left, y: clientY - rect.top };
-            }
-
-            function startDraw(e) { drawing = true; const pos = getPos(e); ctx.beginPath(); ctx.moveTo(pos.x, pos.y); }
-            function draw(e) { if (!drawing) return; const pos = getPos(e); ctx.lineTo(pos.x, pos.y); ctx.stroke(); }
-            function stopDraw() { drawing = false; }
-
-            canvas.addEventListener('mousedown', startDraw);
-            canvas.addEventListener('mousemove', draw);
-            canvas.addEventListener('mouseup', stopDraw);
-
-            canvas.addEventListener('touchstart', startDraw);
-            canvas.addEventListener('touchmove', draw);
-            canvas.addEventListener('touchend', stopDraw);
-        }
-
-        function clearCanvas() { ctx.clearRect(0, 0, canvas.width, canvas.height); }
-
-        function lockSignature() {
-            const dataUrl = canvas.toDataURL();
-            document.getElementById('saved-sig').src = dataUrl;
-            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-            setTimeout(() => nextScreen(5), 1000);
-        }
-
-        // 6. Reasons Jar Logic
-        const re
+     
