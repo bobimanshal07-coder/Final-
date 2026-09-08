@@ -44,7 +44,7 @@
             width: 100%;
             max-width: 500px;
             background: var(--soft-white);
-            border-radius: 20px;
+            border-radius: 24px;
             padding: 25px;
             box-shadow: var(--card-shadow);
             text-align: center;
@@ -60,6 +60,39 @@
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- ENHANCED OPENING SCREEN STYLING --- */
+        #screen1 {
+            background: linear-gradient(180deg, #ffffff 0%, #fff5f8 100%);
+            border: 2px solid #ffccd5;
+            box-shadow: 0 15px 35px rgba(255, 107, 139, 0.25);
+        }
+
+        .monkey-badge {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 10px;
+            background: #ffe6ea;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(255, 107, 139, 0.3);
+            border: 3px solid #ff8e91;
+            animation: floatIcon 3s ease-in-out infinite;
+        }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .opening-title {
+            font-size: 1.8rem;
+            color: var(--dark-pink);
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(216, 27, 96, 0.1);
         }
 
         h1, h2, h3 {
@@ -83,11 +116,11 @@
             background: linear-gradient(135deg, #ff6b8b, #ff8e91);
             color: white;
             border: none;
-            padding: 12px 25px;
-            font-size: 1rem;
+            padding: 14px 25px;
+            font-size: 1.05rem;
             border-radius: 30px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 107, 139, 0.4);
+            box-shadow: 0 6px 20px rgba(255, 107, 139, 0.4);
             transition: all 0.3s ease;
             font-weight: 600;
             margin-top: 15px;
@@ -96,7 +129,7 @@
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 107, 139, 0.6);
+            box-shadow: 0 8px 25px rgba(255, 107, 139, 0.6);
         }
 
         /* Countdown */
@@ -104,14 +137,15 @@
             display: flex;
             justify-content: space-around;
             margin: 20px 0;
-            background: #fff5f7;
-            padding: 15px;
-            border-radius: 15px;
+            background: #fff0f3;
+            padding: 16px;
+            border-radius: 18px;
+            border: 1px solid #ffd8e1;
         }
 
         .time-box span {
             display: block;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: bold;
             color: var(--dark-pink);
         }
@@ -357,8 +391,26 @@
 
     <!-- 1️⃣ OPENING SCREEN -->
     <div class="screen active" id="screen1">
-        <img src="assets/monkey.png" alt="Monkey" style="width: 80px; margin-bottom: 10px;" onerror="this.src='https://cdn-icons-png.flaticon.com/512/616/616430.png'">
-        <h2>For You 💌❤️</h2>
+        <div class="monkey-badge">
+            <svg width="65" height="65" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="14" cy="22" r="8" fill="#B36B39"/>
+                <circle cx="14" cy="22" r="5" fill="#FFCBB3"/>
+                <circle cx="50" cy="22" r="8" fill="#B36B39"/>
+                <circle cx="50" cy="22" r="5" fill="#FFCBB3"/>
+                <path d="M16 34C16 21 48 21 48 34C48 46 16 46 16 34Z" fill="#B36B39"/>
+                <path d="M20 35C20 26 44 26 44 35C44 43 20 43 20 35Z" fill="#FFCBB3"/>
+                <circle cx="27" cy="30" r="3" fill="#2C1810"/>
+                <circle cx="37" cy="30" r="3" fill="#2C1810"/>
+                <circle cx="28" cy="29" r="1" fill="#FFFFFF"/>
+                <circle cx="38" cy="29" r="1" fill="#FFFFFF"/>
+                <ellipse cx="32" cy="35" rx="3" ry="2" fill="#B36B39"/>
+                <path d="M28 38C28 38 30 41 32 41C34 41 36 38 36 38" stroke="#2C1810" stroke-width="2" stroke-linecap="round"/>
+                <path d="M40 18L44 10M44 10L48 18M44 10V22" stroke="#FF6B8B" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </div>
+        
+        <h2 class="opening-title">For You 💌❤️</h2>
+        
         <div class="countdown">
             <div class="time-box"><span id="days">00</span><label>Days</label></div>
             <div class="time-box"><span id="hours">00</span><label>Hours</label></div>
@@ -442,7 +494,7 @@
         <button class="btn" onclick="nextScreen(6)">Proceed ✨</button>
     </div>
 
-    <!-- 6️⃣ WHY I LOVE YOU JAR (UPDATED EXACT 6-STEP ANIMATION) -->
+    <!-- 6️⃣ WHY I LOVE YOU JAR -->
     <div class="screen" id="screen6">
         <h2>Why I Love You Jar 🫙💗</h2>
         <p>Tap the jar to unleash the rainfall of love! ✨</p>
@@ -454,7 +506,7 @@
         <!-- Rain Overlay Container -->
         <div class="rain-container" id="rainContainer"></div>
 
-        <!-- Continue Button (Unlocked at exact 6 Sec) -->
+        <!-- Continue Button -->
         <button class="btn btn-fade-in" id="continueJarBtn" onclick="nextScreen(7)">
             Continue → 🔐
         </button>
@@ -536,8 +588,8 @@
     </div>
 
     <script>
-        // Set target countdown date
-        const targetDate = new Date("Feb 22, 2027 00:00:00").getTime();
+        // Set target countdown date to 16 Sept
+        const targetDate = new Date("Sep 16, 2026 00:00:00").getTime();
 
         setInterval(() => {
             const now = new Date().getTime();
@@ -548,6 +600,11 @@
                 document.getElementById("hours").innerText = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 document.getElementById("minutes").innerText = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
                 document.getElementById("seconds").innerText = Math.floor((difference % (1000 * 60)) / 1000);
+            } else {
+                document.getElementById("days").innerText = "00";
+                document.getElementById("hours").innerText = "00";
+                document.getElementById("minutes").innerText = "00";
+                document.getElementById("seconds").innerText = "00";
             }
         }, 1000);
 
@@ -645,25 +702,30 @@
             "You are precious to me 🥹", "You make me grateful 🌷", "You make me believe in us 🫶", "You make me smile for no reason 😊", "Because you are YOU, and that's enough for me. ❤️🫂"
         ];
 
-        // STEP 6: JAR RAIN TIMED SEQUENCE
+        // STEP 6: RE-CLICKABLE JAR RAIN TIMED SEQUENCE
         let rainInterval = null;
+        let rainTimeout1 = null;
+        let rainTimeout2 = null;
 
         function startJarRainAnimation() {
             const jar = document.getElementById('jarIcon');
             const container = document.getElementById('rainContainer');
             const btn = document.getElementById('continueJarBtn');
 
-            // Prevent re-clicking during animation
-            jar.style.pointerEvents = 'none';
+            // Reset previous timers & intervals if re-clicked
+            if (rainInterval) clearInterval(rainInterval);
+            if (rainTimeout1) clearTimeout(rainTimeout1);
+            if (rainTimeout2) clearTimeout(rainTimeout2);
 
-            // Step 1: 0–1 sec - Jar glow & shake
+            // Re-enable animation class
+            jar.classList.remove('jar-glow-shake');
+            void jar.offsetWidth; // Force reflow
             jar.classList.add('jar-glow-shake');
 
             // Step 2: 1–5 sec - Continuous Rainfall
-            setTimeout(() => {
+            rainTimeout1 = setTimeout(() => {
                 let reasonIndex = 0;
 
-                // Har 40ms par 1 drop → 4 sec mein saare 100 reasons drop honge
                 rainInterval = setInterval(() => {
                     if (reasonIndex < reasons.length) {
                         createRainDrop(reasons[reasonIndex], container, reasonIndex + 1);
@@ -673,10 +735,10 @@
                     }
                 }, 40);
 
-            }, 1000); // 1 sec delay
+            }, 1000);
 
-            // Step 3: Exact 6 sec - Rain stops, Continue button smoothly appears & becomes clickable
-            setTimeout(() => {
+            // Step 3: Exact 6 sec - Continue button appears & stays clickable
+            rainTimeout2 = setTimeout(() => {
                 btn.classList.add('visible');
             }, 6000);
         }
@@ -686,7 +748,6 @@
             card.className = 'rain-card';
             card.innerText = `${count}. ${text}`;
 
-            // Random positions, rotations, and drift
             const randomLeft = Math.floor(Math.random() * 75) + 5;
             const randomRot = (Math.random() * 50 - 25) + 'deg';
             const randomDrift = (Math.random() * 60 - 30) + 'px';
@@ -697,7 +758,6 @@
 
             container.appendChild(card);
 
-            // Auto-remove drop after animation ends (4s)
             setTimeout(() => {
                 card.remove();
             }, 4000);
