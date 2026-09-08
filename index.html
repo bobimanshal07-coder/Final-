@@ -1,30 +1,34 @@
 <!DOCTYPE html>
-<html lang="pa">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday Riya ❤️</title>
     <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Canvas Confetti Library -->
+    <!-- JS Confetti Library -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
     <style>
         :root {
-            --bg-color: #fff0f3;
-            --primary-color: #ff4d6d;
-            --secondary-color: #ff758f;
-            --text-color: #590d22;
-            --card-bg: #ffffff;
+            --bg-color: #fff0f5;
+            --primary-pink: #ff6b8b;
+            --dark-pink: #d81b60;
+            --soft-white: #ffffff;
+            --text-color: #4a4a4a;
+            --card-shadow: 0 10px 25px rgba(255, 107, 139, 0.2);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Poppins', sans-serif;
         }
 
         body {
+            font-family: 'Poppins', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             display: flex;
@@ -39,13 +43,14 @@
             display: none;
             width: 100%;
             max-width: 500px;
-            background: var(--card-bg);
-            padding: 25px;
+            background: var(--soft-white);
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(255, 77, 109, 0.15);
+            padding: 25px;
+            box-shadow: var(--card-shadow);
             text-align: center;
+            border: 2px solid #ffe1e8;
+            animation: fadeIn 0.5s ease-in-out;
             position: relative;
-            animation: fadeIn 0.4s ease-in-out;
         }
 
         .screen.active {
@@ -58,349 +63,565 @@
         }
 
         h1, h2, h3 {
-            color: var(--primary-color);
+            color: var(--dark-pink);
             margin-bottom: 15px;
         }
 
         p {
-            font-size: 0.95rem;
-            line-height: 1.6;
             margin-bottom: 15px;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .handwritten {
+            font-family: 'Caveat', cursive;
+            font-size: 1.4rem;
+            color: #c2185b;
         }
 
         .btn {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(135deg, #ff6b8b, #ff8e91);
             color: white;
             border: none;
             padding: 12px 25px;
             font-size: 1rem;
-            font-weight: 600;
             border-radius: 30px;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
-            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 139, 0.4);
+            transition: all 0.3s ease;
+            font-weight: 600;
             margin-top: 15px;
             width: 100%;
         }
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 77, 109, 0.4);
+            box-shadow: 0 6px 20px rgba(255, 107, 139, 0.6);
         }
 
-        /* Screen 1: Opening */
-        .monkey-img { width: 110px; height: 110px; object-fit: contain; margin-bottom: 10px; }
-        .timer-box { display: flex; justify-content: space-around; margin: 20px 0; }
-        .time-unit { background: #fff0f3; padding: 10px; border-radius: 10px; min-width: 65px; }
-        .time-unit span { display: block; font-size: 1.4rem; font-weight: bold; color: var(--primary-color); }
-        .time-unit label { font-size: 0.75rem; }
+        /* Countdown */
+        .countdown {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            background: #fff5f7;
+            padding: 15px;
+            border-radius: 15px;
+        }
 
-        /* Screen 3: Quiz */
-        .quiz-opt { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
-        .opt-btn { background: #f8f9fa; border: 2px solid #ffccd5; padding: 12px; border-radius: 12px; cursor: pointer; font-weight: 600; }
-        .opt-btn:hover { background: #ffccd5; }
+        .time-box span {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--dark-pink);
+        }
 
-        /* Screen 4: Promises */
-        .promise-list { text-align: left; margin: 15px 0; }
-        .promise-item { background: #fff0f3; padding: 12px; border-radius: 10px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px; }
-        .promise-item input { margin-top: 4px; accent-color: var(--primary-color); transform: scale(1.2); }
-        
-        /* Signature Canvas */
-        #sig-canvas { border: 2px dashed var(--primary-color); border-radius: 10px; background: #fff; cursor: crosshair; touch-action: none; margin-top: 10px; width: 100%; height: 140px; }
+        .time-box label {
+            font-size: 0.75rem;
+            color: #888;
+        }
 
-        /* Screen 5: Agreement View */
-        .agreement-paper { background: #fff9fa; border: 2px solid #ffb3c1; padding: 15px; border-radius: 10px; text-align: left; font-size: 0.85rem; }
+        /* Nickname Options */
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 15px 0;
+        }
 
-        /* Screen 6: Jar */
-        .jar-container { font-size: 80px; cursor: pointer; user-select: none; transition: transform 0.1s; }
-        .jar-container:active { transform: scale(0.9); }
-        .rain-box { min-height: 120px; background: #fff0f3; border-radius: 10px; padding: 15px; margin: 15px 0; display: flex; align-items: center; justify-content: center; font-weight: 600; color: var(--primary-color); transition: all 0.1s ease; }
+        .option-btn {
+            background: #fff;
+            border: 2px solid #ffccd5;
+            padding: 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 1rem;
+        }
 
-        /* Screen 8: Vault */
-        .pin-input { width: 140px; font-size: 1.8rem; text-align: center; letter-spacing: 8px; padding: 8px; border: 2px solid var(--primary-color); border-radius: 10px; outline: none; margin: 15px 0; }
+        .option-btn:hover {
+            background: #ffe6ea;
+        }
 
-        /* Screen 9: Memories Flip Card */
-        .card-container { perspective: 1000px; width: 100%; height: 320px; margin: 15px 0; }
-        .flip-card { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.6s; cursor: pointer; }
-        .flip-card.flipped { transform: rotateY(180deg); }
-        .card-front, .card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 15px; overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .card-front img { width: 100%; height: 100%; object-fit: cover; }
-        .card-back { background: #fff0f3; color: var(--text-color); transform: rotateY(180deg); padding: 20px; border: 2px solid var(--primary-color); font-weight: 600; }
+        /* Promises List */
+        .promise-item {
+            text-align: left;
+            background: #fff5f7;
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
 
-        /* Screen 11: Final Wish */
-        .garland { display: flex; justify-content: space-around; margin-bottom: 15px; overflow: hidden; }
-        .garland img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-color); }
-        .handwritten { font-family: 'Caveat', cursive; font-size: 1.35rem; line-height: 1.5; text-align: left; background: #fff9fa; padding: 15px; border-radius: 10px; border-left: 4px solid var(--primary-color); margin: 15px 0; }
+        .promise-item input {
+            margin-top: 5px;
+            accent-color: var(--dark-pink);
+            transform: scale(1.2);
+        }
 
-        /* Screen 12: Audio */
-        .profile-header { display: flex; align-items: center; gap: 15px; text-align: left; margin-bottom: 20px; }
-        .dp-img { width: 75px; height: 75px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary-color); }
-        audio { width: 100%; margin: 20px 0; }
+        /* Canvas Signature */
+        #sig-canvas {
+            border: 2px dashed var(--primary-pink);
+            border-radius: 10px;
+            background: #fff;
+            cursor: crosshair;
+            touch-action: none;
+            margin-top: 10px;
+        }
+
+        /* --- STEP 6 JAR & RAIN ANIMATIONS --- */
+        .jar-wrapper {
+            display: inline-block;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin: 20px 0;
+        }
+
+        .jar-glow-shake {
+            animation: jarGlowShake 1s ease-in-out forwards;
+        }
+
+        @keyframes jarGlowShake {
+            0% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 0px transparent); }
+            25% { transform: scale(1.15) rotate(-6deg); filter: drop-shadow(0 0 15px #ff6b8b); }
+            50% { transform: scale(1.15) rotate(6deg); filter: drop-shadow(0 0 25px #ff6b8b); }
+            75% { transform: scale(1.15) rotate(-3deg); filter: drop-shadow(0 0 15px #ff6b8b); }
+            100% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 8px #ff6b8b); }
+        }
+
+        .rain-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 999;
+            overflow: hidden;
+        }
+
+        .rain-card {
+            position: absolute;
+            top: -50px;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--dark-pink);
+            border: 1px solid #ffccd5;
+            padding: 8px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(255, 107, 139, 0.3);
+            white-space: nowrap;
+            animation: fallAndFade 4s linear forwards;
+        }
+
+        @keyframes fallAndFade {
+            0% {
+                top: -50px;
+                opacity: 0;
+                transform: translateX(0) rotate(0deg);
+            }
+            10% {
+                opacity: 1;
+            }
+            75% {
+                opacity: 1;
+            }
+            100% {
+                top: 90vh;
+                opacity: 0;
+                transform: translateX(var(--drift)) rotate(var(--rot));
+            }
+        }
+
+        .btn-fade-in {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .btn-fade-in.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* PIN Pad */
+        .pin-input {
+            width: 120px;
+            font-size: 1.8rem;
+            letter-spacing: 10px;
+            text-align: center;
+            padding: 5px;
+            border: 2px solid var(--primary-pink);
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        /* Flip Card Memories */
+        .flip-card {
+            background-color: transparent;
+            width: 100%;
+            height: 320px;
+            perspective: 1000px;
+            margin: 15px 0;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 4px solid #fff;
+        }
+
+        .flip-card-front img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .flip-card-back {
+            background-color: #ffe6ea;
+            color: var(--dark-pink);
+            transform: rotateY(180deg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Garland Decoration */
+        .garland {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .garland img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-pink);
+        }
+
+        /* Audio Player Profile */
+        .dp-container {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            border: 3px solid var(--primary-pink);
+            padding: 3px;
+            background: #fff;
+        }
+
+        .dp-container img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .error-text {
+            color: #e53935;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
     </style>
 </head>
 <body>
 
-    <!-- 1️⃣ Opening Screen -->
-    <div id="screen1" class="screen active">
-        <img src="assets/monkey.png" alt="Cute Monkey" class="monkey-img">
+    <!-- 1️⃣ OPENING SCREEN -->
+    <div class="screen active" id="screen1">
+        <img src="assets/monkey.png" alt="Monkey" style="width: 80px; margin-bottom: 10px;" onerror="this.src='https://cdn-icons-png.flaticon.com/512/616/616430.png'">
         <h2>For You 💌❤️</h2>
-        <div class="timer-box">
-            <div class="time-unit"><span id="days">00</span><label>Days</label></div>
-            <div class="time-unit"><span id="hours">00</span><label>Hours</label></div>
-            <div class="time-unit"><span id="mins">00</span><label>Minutes</label></div>
-            <div class="time-unit"><span id="secs">00</span><label>Seconds</label></div>
+        <div class="countdown">
+            <div class="time-box"><span id="days">00</span><label>Days</label></div>
+            <div class="time-box"><span id="hours">00</span><label>Hours</label></div>
+            <div class="time-box"><span id="minutes">00</span><label>Minutes</label></div>
+            <div class="time-box"><span id="seconds">00</span><label>Seconds</label></div>
         </div>
         <button class="btn" onclick="nextScreen(2)">Open Your Surprise ✨</button>
     </div>
 
-    <!-- 2️⃣ Welcome -->
-    <div id="screen2" class="screen">
+    <!-- 2️⃣ WELCOME -->
+    <div class="screen" id="screen2">
         <h2>Happy Birthday, Meri Jaan Riya ❤️✨</h2>
-        <p>Ajj da din sirf tere naam… 🌷</p>
-        <p>Bas hamesha khush te hassdi rave.</p>
-        <p>You deserve all the happiness in the world. 🤍</p>
-        <p>Welcome to your little surprise… 🎀</p>
+        <p>Ajj da din sirf tere naam… 🌷<br>Bas hamesha khush te hassdi rave.<br>You deserve all the happiness in the world. 🤍</p>
+        <p class="handwritten">Welcome to your little surprise… 🎀</p>
         <button class="btn" onclick="nextScreen(3)">Enter the Secret Vault 🔐</button>
     </div>
 
-    <!-- 3️⃣ Nickname Gate -->
-    <div id="screen3" class="screen">
-        <h2>Only the real one knows this… 😜❤️</h2>
-        <p>And tuci irritate v hunde oo 🤭</p>
-        <div class="quiz-opt">
-            <button class="opt-btn" onclick="checkNickname(false)">Princess 👑</button>
-            <button class="opt-btn" onclick="checkNickname(true)">Bandri 🐒😂</button>
-            <button class="opt-btn" onclick="checkNickname(false)">Cutie 🥰</button>
+    <!-- 3️⃣ NICKNAME GATE -->
+    <div class="screen" id="screen3">
+        <h2>Identify Yourself 🐒</h2>
+        <p>Only the real one knows this… 😜❤️<br><small>(And tuci irritate v hunde oo 🤭)</small></p>
+        <div class="options-grid">
+            <button class="option-btn" onclick="checkNickname(false)">Princess 👑</button>
+            <button class="option-btn" onclick="checkNickname(true)">Bandri 🐒😂</button>
+            <button class="option-btn" onclick="checkNickname(false)">Cutie 🥰</button>
         </div>
-        <p id="quiz-msg" style="margin-top: 15px; font-weight: bold; color: var(--primary-color);"></p>
-        <button id="quiz-unlock-btn" class="btn" style="display:none;" onclick="nextScreen(4)">Unlock 🔓</button>
+        <p class="error-text" id="nickname-err">Ohooo! Galat answer 😜😂<br>Chal hun sahi nickname choose kar, Bandri 🐒❤️</p>
+        <button class="btn" id="unlock-nick-btn" style="display: none;" onclick="nextScreen(4)">Unlock 🔓</button>
     </div>
 
-    <!-- 4️⃣ 5 Little Promises -->
-    <div id="screen4" class="screen">
+    <!-- 4️⃣ 5 LITTLE PROMISES -->
+    <div class="screen" id="screen4">
         <h2>5 Little Promises 🥹❤️</h2>
-        <div class="promise-list">
-            <div class="promise-item"><input type="checkbox" class="p-check" onchange="checkPromises()"><p><b>😤 Gussa Policy:</b> Kinna vi gussa hove, par gall karni kade nahi chhadni. ❤️</p></div>
-            <div class="promise-item"><input type="checkbox" class="p-check" onchange="checkPromises()"><p><b>🗣️ Communication First:</b> Je kade misunderstanding hove, taan dovein kathe baith ke pyaar naal solve karaange. 🫶</p></div>
-            <div class="promise-item"><input type="checkbox" class="p-check" onchange="checkPromises()"><p><b>😊 Daily Smile Mandate:</b> Smile karni compulsory aa… chahe din kinna vi weird kyon na hove! 😚✨</p></div>
-            <div class="promise-item"><input type="checkbox" class="p-check" onchange="checkPromises()"><p><b>🌷 Self-Care Promise:</b> Apna khayal har haal vich rakhengi… kyunki tu important aa. 🥹❤️</p></div>
-            <div class="promise-item"><input type="checkbox" class="p-check" onchange="checkPromises()"><p><b>🥺 Forgiveness Clause:</b> Main thoda jeha na-samajh aan 😭😂… je kade koi galti ho jave, taan maaf kar dengi na? 🥹❤️</p></div>
+        
+        <div class="promise-item">
+            <input type="checkbox" class="p-check" onchange="checkAllPromises()">
+            <div><b>😤 Gussa Policy</b><br><small>Kinna vi gussa hove, par gall karni kade nahi chhadni. ❤️</small></div>
         </div>
-        <p id="all-agreed-text" style="display:none; font-weight:bold; color: green;">All Agreed 💗</p>
+        <div class="promise-item">
+            <input type="checkbox" class="p-check" onchange="checkAllPromises()">
+            <div><b>🗣️ Communication First</b><br><small>Je kade misunderstanding hove, taan dovein kathe baith ke pyaar naal solve karaange. 🫶</small></div>
+        </div>
+        <div class="promise-item">
+            <input type="checkbox" class="p-check" onchange="checkAllPromises()">
+            <div><b>😊 Daily Smile Mandate</b><br><small>Smile karni compulsory aa… chahe din kinna vi weird kyon na hove! 😚✨</small></div>
+        </div>
+        <div class="promise-item">
+            <input type="checkbox" class="p-check" onchange="checkAllPromises()">
+            <div><b>🌷 Self-Care Promise</b><br><small>Apna khayal har haal vich rakhengi… kyunki tu important aa. 🥹❤️</small></div>
+        </div>
+        <div class="promise-item">
+            <input type="checkbox" class="p-check" onchange="checkAllPromises()">
+            <div><b>🥺 Forgiveness Clause</b><br><small>Main thoda jeha na-samajh aan 😭😂… je kade koi galti ho jave, taan maaf kar dengi na? 🥹❤️</small></div>
+        </div>
 
-        <div id="sig-section" style="display:none; margin-top: 15px;">
-            <h3>Sign Your Little Promise ✍️💗</h3>
-            <p style="font-size:0.8rem;">Mouse ya finger naal apna signature banao.</p>
-            <canvas id="sig-canvas"></canvas>
-            <div style="display:flex; gap:10px;">
-                <button class="btn" style="background:#6c757d;" onclick="clearCanvas()">Clear</button>
+        <div id="signature-section" style="display: none; margin-top: 15px;">
+            <p class="handwritten">Sign Your Little Promise ✍️💗</p>
+            <canvas id="sig-canvas" width="300" height="100"></canvas>
+            <div style="display: flex; gap: 10px; margin-top: 5px;">
+                <button class="btn" style="background:#888;" onclick="clearCanvas()">Clear</button>
                 <button class="btn" onclick="lockSignature()">Lock Signature 🔒</button>
             </div>
         </div>
     </div>
 
-    <!-- 5️⃣ Agreement Paper Frame -->
-    <div id="screen5" class="screen">
-        <h2>Promise Agreement Paper 📜💗</h2>
-        <div class="agreement-paper">
-            <p>✔ Kinna vi gussa hove, gall karni kade nahi chhadni.</p>
-            <p>✔ Misunderstanding kathe baith ke solve karaange.</p>
-            <p>✔ Daily Smile compulsory aa!</p>
-            <p>✔ Apna khayal har haal vich rakhengi.</p>
-            <p>✔ Galti hon te maaf kar dengi.</p>
-            <br>
-            <p><b>Signed By:</b> Riya (Bandri 🐒)</p>
-            <img id="saved-sig" style="width:100%; max-height:80px; object-fit:contain; border-bottom: 2px solid var(--primary-color);" alt="Signature" />
+    <!-- 5️⃣ AGREEMENT PAPER DISPLAY -->
+    <div class="screen" id="screen5">
+        <h2>Official Agreement 📜💗</h2>
+        <div style="background: #fffdf5; border: 2px solid #f3e5ab; padding: 15px; text-align: left; border-radius: 10px;">
+            <p style="text-align: center; font-weight: bold; color: var(--dark-pink);">All Agreed 💗</p>
+            <ul style="font-size: 0.8rem; padding-left: 15px; margin-bottom: 15px; line-height: 1.8;">
+                <li>Gussa Policy Accepted ✅</li>
+                <li>Communication First Agreed ✅</li>
+                <li>Daily Smile Mandate Signed ✅</li>
+                <li>Self-Care Promise Promised ✅</li>
+                <li>Forgiveness Clause Granted ✅</li>
+            </ul>
+            <p style="font-size: 0.8rem; margin-bottom: 5px;">Signature ✍️💗:</p>
+            <img id="saved-sig-img" style="max-width: 100%; height: 60px; border-bottom: 1px solid #ccc;" alt="Signature">
         </div>
-        <button class="btn" onclick="nextScreen(6)">Continue ✨</button>
+        <button class="btn" onclick="nextScreen(6)">Proceed ✨</button>
     </div>
 
-    <!-- 6️⃣ Why I Love You Jar -->
-    <div id="screen6" class="screen">
+    <!-- 6️⃣ WHY I LOVE YOU JAR (UPDATED EXACT 6-STEP ANIMATION) -->
+    <div class="screen" id="screen6">
         <h2>Why I Love You Jar 🫙💗</h2>
-        <p>Tap the jar to reveal reasons! ✨</p>
-        <div class="jar-container" onclick="revealReasonRain()">🫙</div>
-        <div class="rain-box" id="reason-text">Tap the Jar! 👇</div>
-        <button id="jar-next-btn" class="btn" style="display:none;" onclick="nextScreen(7)">Next Surprise ✨</button>
+        <p>Tap the jar to unleash the rainfall of love! ✨</p>
+
+        <div class="jar-wrapper" id="jarIcon" onclick="startJarRainAnimation()">
+            <div style="font-size: 5.5rem;">🫙</div>
+        </div>
+
+        <!-- Rain Overlay Container -->
+        <div class="rain-container" id="rainContainer"></div>
+
+        <!-- Continue Button (Unlocked at exact 6 Sec) -->
+        <button class="btn btn-fade-in" id="continueJarBtn" onclick="nextScreen(7)">
+            Continue → 🔐
+        </button>
     </div>
 
-    <!-- 7️⃣ Transition Gate -->
-    <div id="screen7" class="screen">
-        <h2>Ready for the Vault? 🔐</h2>
-        <p>Your memories and final messages are locked inside!</p>
-        <button class="btn" onclick="nextScreen(8)">Continue to Secret Vault 🔐</button>
-    </div>
-
-    <!-- 8️⃣ Secret Love Vault -->
-    <div id="screen8" class="screen">
+    <!-- 7️⃣ SECRET VAULT GATE -->
+    <div class="screen" id="screen7">
         <h2>Secret Love Vault 🔐❤️</h2>
-        <p style="font-size:0.85rem;">Hint: Tuhade favourite person di birthday date 😉🎂❤️</p>
-        <input type="number" id="pin-field" class="pin-input" placeholder="****">
-        <p id="pin-msg" style="color:var(--primary-color); font-weight:bold;"></p>
-        <button class="btn" onclick="unlockVault()">Unlock Vault 🔓</button>
+        <p>Hint: Tuhade favourite person di birthday date 😉🎂❤️</p>
+        <input type="password" id="pin-input" class="pin-input" maxlength="4" placeholder="••••">
+        <br>
+        <button class="btn" onclick="checkPIN()">Unlock Vault 🔓</button>
+        <p class="error-text" id="pin-err">Hmm… PIN match nahi hoya 😜 Try again ❤️</p>
     </div>
 
-    <!-- 📸 9️⃣ Memories Section (1 to 9) -->
-    <div id="screen9" class="screen">
-        <p id="mem-counter" style="font-size:0.85rem; font-weight:600; color:var(--primary-color);">Memory 1 of 9</p>
-        <div class="card-container" onclick="flipCard()">
-            <div class="flip-card" id="mem-card">
-                <div class="card-front">
-                    <img id="mem-img" src="assets/photo1.jpg" alt="Memory">
+    <!-- 8️⃣ MEMORIES SLIDER -->
+    <div class="screen" id="screen8">
+        <h2 id="memory-counter">Memory 1 of 9</h2>
+        <p style="font-size: 0.8rem; color:#888;">Tap photo to flip for message 🔄</p>
+        
+        <div class="flip-card" id="flipCard" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img id="memory-img" src="" alt="Memory Photo">
                 </div>
-                <div class="card-back" id="mem-text">
-                    Ik chhoti jehi memory… par smile bahut vaddi. 🥹❤️
+                <div class="flip-card-back">
+                    <p id="memory-msg" class="handwritten"></p>
                 </div>
             </div>
         </div>
-        <p style="font-size:0.75rem; color:#888;">(Tap photo to flip 🔄)</p>
+
         <button class="btn" onclick="nextMemory()">Next Memory ➜</button>
     </div>
 
-    <!-- 🎂 11 Final Wish -->
-    <div id="screen11" class="screen">
-        <div class="garland">
-            <img src="assets/photo1.jpg" alt="garland1">
-            <img src="assets/photo2.jpg" alt="garland2">
-            <img src="assets/photo3.jpg" alt="garland3">
-            <img src="assets/photo4.jpg" alt="garland4">
-            <img src="assets/photo5.jpg" alt="garland5">
-        </div>
+    <!-- 1️⃣1️⃣ FINAL WISH -->
+    <div class="screen" id="screen11">
+        <div class="garland" id="garland-container"></div>
         <h2>One Last Wish For You 🎂💗</h2>
-        <div class="handwritten">
-            Happy Birthday once again, Meri Jaan Riya 🎂❤️<br><br>
-            Rabb kare tu hamesha eddan hi hassdi reh, khush reh te life nu apne tareeke naal enjoy kardi reh. 🫶🏻✨<br><br>
-            Tere dreams menu honestly ni pta 🤭 par jo vi ne, saare poore hon. ❤️ Te haan… ohna ch menu chhad ke hor sab kuchh mil jaave, eh taan bilkul ni hona 😂🤭 Thodi jehi jagah mere layi vi rakh lavi.<br><br>
-            Eh chhota jeha surprise bas tere layi, sirf tere chehre te smile dekhan layi. 💗<br><br>
-            Bas hamesha khush reh, hassdi reh te apni sohni jehi smile kade na khona. ✨<br><br>
-            Happy Birthday once again, Riya! 🎂❤️ Rabb kare aun wala har din hor vi sohnaa hove. 🌷<br><br>
-            Made with memories, thodi masti te bohot saara dil… sirf tere layi. 🐒❤️<br><br>
-            <b>Bas hamesha khush te smile kardi rehna, Bandri 🐒❤️</b>
+        
+        <div class="handwritten" style="text-align: left; line-height: 1.7; background: #fff5f7; padding: 15px; border-radius: 12px; margin-bottom: 15px;">
+            <p>Happy Birthday once again, Meri Jaan Riya 🎂❤️</p>
+            <p>Rabb kare tu hamesha eddan hi hassdi reh, khush reh te life nu apne tareeke naal enjoy kardi reh. 🫶🏻✨</p>
+            <p>Tere dreams menu honestly ni pta 🤭 par jo vi ne, saare poore hon. ❤️ Te haan… ohna ch menu chhad ke hor sab kuchh mil jaave, eh taan bilkul ni hona 😂🤭 Thodi jehi jagah mere layi vi rakh lavi.</p>
+            <p>Eh chhota jeha surprise bas tere layi, sirf tere chehre te smile dekhan layi. 💗</p>
+            <p>Bas hamesha khush reh, hassdi reh te apni sohni jehi smile kade na khona. ✨</p>
+            <p>Happy Birthday once again, Riya! 🎂❤️ Rabb kare aun wala har din hor vi sohnaa hove. 🌷</p>
+            <p>Made with memories, thodi masti te bohot saara dil… sirf tere layi. 🐒❤️</p>
+            <br>
+            <p style="text-align: center; font-weight: bold;">Bas hamesha khush te smile kardi rehna, Bandri 🐒❤️</p>
         </div>
+
         <button class="btn" onclick="nextScreen(12)">A Little Something 🎧</button>
     </div>
 
-    <!-- 🎧 12 Final Audio -->
-    <div id="screen12" class="screen">
-        <div class="profile-header">
-            <img src="assets/photo10.jpg" class="dp-img" alt="Riya DP">
-            <div>
-                <h3>For You, With Love 🎧❤️</h3>
-                <p style="font-size:0.8rem; margin:0;">A final little surprise… press play when you're ready 🥹</p>
-            </div>
+    <!-- 1️⃣2️⃣ FINAL AUDIO -->
+    <div class="screen" id="screen12">
+        <div class="dp-container">
+            <img src="photo10.jpg" alt="Riya DP" onerror="this.src='https://via.placeholder.com/150'">
         </div>
-        <audio controls>
+        <h2>For You, With Love 🎧❤️</h2>
+        <p>A final little surprise… press play when you're ready 🥹</p>
+        
+        <audio controls style="width: 100%; margin: 15px 0;">
             <source src="assets/final-surprise.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
+
         <button class="btn" onclick="nextScreen(13)">Next Surprise 🎁</button>
     </div>
 
-    <!-- 🎁 13 2027 Gift Mystery -->
-    <div id="screen13" class="screen">
-        <div style="font-size:70px; margin-bottom:10px;">🎁</div>
+    <!-- 1️⃣3️⃣ 2027 GIFT MYSTERY -->
+    <div class="screen" id="screen13">
+        <div style="font-size: 4rem;">🎁</div>
         <h2>2027 Gift Mystery 👀✨</h2>
         <p>2027 ch ik hor surprise tera wait kar reha aa… 😜❤️</p>
-        <p>Hun bas eh secret locked aa 🔒<br>Time aunde hi reveal hovega. 🫶</p>
-        <p style="font-weight: bold; color: var(--primary-color); margin-top:20px;">Until then… keep smiling, Bandri 🐒💗</p>
+        <p style="background: #ffe6ea; padding: 10px; border-radius: 10px; color: var(--dark-pink); font-weight: 600;">Hun bas eh secret locked aa 🔒<br>Time aunde hi reveal hovega. 🫶</p>
+        <br>
+        <p class="handwritten">Until then… keep smiling, Bandri 🐒💗</p>
     </div>
 
     <script>
-        // 1. Navigation Flow
-        function nextScreen(screenNum) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById('screen' + screenNum).classList.add('active');
-            window.scrollTo(0, 0);
-        }
+        // Set target countdown date
+        const targetDate = new Date("Feb 22, 2027 00:00:00").getTime();
 
-        // Countdown Timer Target Date
-        const targetDate = new Date("Sept 16, 2026 00:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
-            const diff = targetDate - now;
-            if (diff > 0) {
-                document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-                document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                document.getElementById('secs').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+            const difference = targetDate - now;
+
+            if(difference > 0) {
+                document.getElementById("days").innerText = Math.floor(difference / (1000 * 60 * 60 * 24));
+                document.getElementById("hours").innerText = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById("minutes").innerText = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById("seconds").innerText = Math.floor((difference % (1000 * 60)) / 1000);
             }
         }, 1000);
 
-        // 3. Quiz Logic
+        function nextScreen(screenNum) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(`screen${screenNum}`).classList.add('active');
+            if(screenNum === 11) initGarland();
+        }
+
+        // Nickname Logic
         function checkNickname(isCorrect) {
-            const msg = document.getElementById('quiz-msg');
-            const unlockBtn = document.getElementById('quiz-unlock-btn');
-            if (isCorrect) {
-                msg.innerText = "Sahi pakde hai! 🎉❤️";
-                msg.style.color = "green";
+            const err = document.getElementById('nickname-err');
+            const unlockBtn = document.getElementById('unlock-nick-btn');
+            if(isCorrect) {
+                err.style.display = 'none';
                 confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
                 unlockBtn.style.display = 'block';
             } else {
-                msg.innerText = "Ohooo! Galat answer 😜😂 Chal hun sahi nickname choose kar, Bandri 🐒❤️";
-                msg.style.color = "var(--primary-color)";
+                err.style.display = 'block';
                 unlockBtn.style.display = 'none';
             }
         }
 
-        // 4. Promises & Signature Logic
-        function checkPromises() {
-            const checks = document.querySelectorAll('.p-check');
-            const allChecked = Array.from(checks).every(c => c.checked);
-            if (allChecked) {
-                document.getElementById('all-agreed-text').style.display = 'block';
-                document.getElementById('sig-section').style.display = 'block';
-                setTimeout(initCanvas, 100);
+        // Promises Logic
+        function checkAllPromises() {
+            const checkboxes = document.querySelectorAll('.p-check');
+            const allChecked = Array.from(checkboxes).every(c => c.checked);
+            if(allChecked) {
+                document.getElementById('signature-section').style.display = 'block';
+                initCanvas();
             }
         }
 
-        let canvas = null, ctx = null, drawing = false;
-
+        // Canvas Signature
+        let canvas, ctx, drawing = false;
         function initCanvas() {
             canvas = document.getElementById('sig-canvas');
-            if (!canvas) return;
-            canvas.width = canvas.offsetWidth;
-            canvas.height = canvas.offsetHeight;
             ctx = canvas.getContext('2d');
-            ctx.lineWidth = 3;
-            ctx.strokeStyle = '#ff4d6d';
-            ctx.lineCap = 'round';
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = "#d81b60";
 
-            function getPos(e) {
+            function startDraw(e) { drawing = true; draw(e); }
+            function endDraw() { drawing = false; ctx.beginPath(); }
+            function draw(e) {
+                if(!drawing) return;
                 const rect = canvas.getBoundingClientRect();
-                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-                return { x: clientX - rect.left, y: clientY - rect.top };
+                const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+                const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+                ctx.lineTo(x, y);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(x, y);
             }
 
-            function startDraw(e) { drawing = true; const pos = getPos(e); ctx.beginPath(); ctx.moveTo(pos.x, pos.y); }
-            function draw(e) { if (!drawing) return; const pos = getPos(e); ctx.lineTo(pos.x, pos.y); ctx.stroke(); }
-            function stopDraw() { drawing = false; }
-
-            canvas.onmousedown = startDraw;
-            canvas.onmousemove = draw;
-            canvas.onmouseup = stopDraw;
-
-            canvas.ontouchstart = (e) => { e.preventDefault(); startDraw(e); };
-            canvas.ontouchmove = (e) => { e.preventDefault(); draw(e); };
-            canvas.ontouchend = stopDraw;
+            canvas.addEventListener('mousedown', startDraw);
+            canvas.addEventListener('mouseup', endDraw);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('touchstart', startDraw);
+            canvas.addEventListener('touchend', endDraw);
+            canvas.addEventListener('touchmove', draw);
         }
 
-        function clearCanvas() { 
-            if (ctx && canvas) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height); 
-            }
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
 
         function lockSignature() {
-            if (canvas) {
-                const dataUrl = canvas.toDataURL();
-                document.getElementById('saved-sig').src = dataUrl;
-                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-                setTimeout(() => nextScreen(5), 800);
-            }
+            const dataURL = canvas.toDataURL();
+            document.getElementById('saved-sig-img').src = dataURL;
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+            setTimeout(() => nextScreen(5), 1000);
         }
 
-        // 6. Reasons Jar Logic
+        // 100 Reasons Array
         const reasons = [
             "Your smile 😊", "Your cute nature 🫶", "Your caring heart ❤️", "Your beautiful soul ✨", "Your honesty 🤍",
             "Your kindness 🌸", "Your voice 🥹", "Your laugh 😂❤️", "Your understanding 🫂", "Your little efforts 💕",
@@ -423,57 +644,126 @@
             "You make my heart smile 🥹", "You are always special to me 🫶", "You are impossible to replace 🤍", "You are one of a kind ✨", "You make everything feel better ❤️",
             "You are precious to me 🥹", "You make me grateful 🌷", "You make me believe in us 🫶", "You make me smile for no reason 😊", "Because you are YOU, and that's enough for me. ❤️🫂"
         ];
-        let reasonIdx = 0;
-        function revealReason() {
-            document.getElementById('reason-text').innerText = `${reasonIdx + 1}. ${reasons[reasonIdx]}`;
-            reasonIdx++;
-            if (reasonIdx >= reasons.length) {
-                reasonIdx = 0;
-                document.getElementById('jar-next-btn').style.display = 'block';
-            }
+
+        // STEP 6: JAR RAIN TIMED SEQUENCE
+        let rainInterval = null;
+
+        function startJarRainAnimation() {
+            const jar = document.getElementById('jarIcon');
+            const container = document.getElementById('rainContainer');
+            const btn = document.getElementById('continueJarBtn');
+
+            // Prevent re-clicking during animation
+            jar.style.pointerEvents = 'none';
+
+            // Step 1: 0–1 sec - Jar glow & shake
+            jar.classList.add('jar-glow-shake');
+
+            // Step 2: 1–5 sec - Continuous Rainfall
+            setTimeout(() => {
+                let reasonIndex = 0;
+
+                // Har 40ms par 1 drop → 4 sec mein saare 100 reasons drop honge
+                rainInterval = setInterval(() => {
+                    if (reasonIndex < reasons.length) {
+                        createRainDrop(reasons[reasonIndex], container, reasonIndex + 1);
+                        reasonIndex++;
+                    } else {
+                        clearInterval(rainInterval);
+                    }
+                }, 40);
+
+            }, 1000); // 1 sec delay
+
+            // Step 3: Exact 6 sec - Rain stops, Continue button smoothly appears & becomes clickable
+            setTimeout(() => {
+                btn.classList.add('visible');
+            }, 6000);
         }
 
-        // 8. PIN Vault
-        function unlockVault() {
-            const pin = document.getElementById('pin-field').value;
-            const msg = document.getElementById('pin-msg');
-            if (pin === "2202") {
-                confetti({ particleCount: 120, spread: 80 });
-                nextScreen(9);
+        function createRainDrop(text, container, count) {
+            const card = document.createElement('div');
+            card.className = 'rain-card';
+            card.innerText = `${count}. ${text}`;
+
+            // Random positions, rotations, and drift
+            const randomLeft = Math.floor(Math.random() * 75) + 5;
+            const randomRot = (Math.random() * 50 - 25) + 'deg';
+            const randomDrift = (Math.random() * 60 - 30) + 'px';
+
+            card.style.left = `${randomLeft}%`;
+            card.style.setProperty('--rot', randomRot);
+            card.style.setProperty('--drift', randomDrift);
+
+            container.appendChild(card);
+
+            // Auto-remove drop after animation ends (4s)
+            setTimeout(() => {
+                card.remove();
+            }, 4000);
+        }
+
+        // PIN Check
+        function checkPIN() {
+            const pin = document.getElementById('pin-input').value;
+            const err = document.getElementById('pin-err');
+            if(pin === "2202") {
+                err.style.display = 'none';
+                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                setTimeout(() => {
+                    initMemories();
+                    nextScreen(8);
+                }, 800);
             } else {
-                msg.innerText = "Hmm… PIN match nahi hoya 😜 Try again ❤️";
+                err.style.display = 'block';
             }
         }
 
-        // 9. Photo Memories Logic (1 to 9)
-        const memories = [
-            { img: "assets/photo1.jpg", text: "Ik chhoti jehi memory… par smile bahut vaddi. 🥹❤️" },
-            { img: "assets/photo2.jpg", text: "Eh pal humesha mere dil de nede rahega. ✨" },
-            { img: "assets/photo3.jpg", text: "Teri eh wali smile sab toh best aa. 😊❤️" },
-            { img: "assets/photo4.jpg", text: "Thodi jehi bak-bak te bohot saari masti! 😜" },
-            { img: "assets/photo5.jpg", text: "Har photo vich tu hor vi sohni lagdi ae. 🌸" },
-            { img: "assets/photo6.jpg", text: "Kujh yaadan kade puraniyan nahi hundiyan. 🤍" },
-            { img: "assets/photo7.jpg", text: "Tere naal bitaya har ek second special aa. 🫶" },
-            { img: "assets/photo8.jpg", text: "Bas eddan hi hamesha hassdi reh. 🥹✨" },
-            { img: "assets/photo9.jpg", text: "Last memory before the final surprise… 🥹🎀" }
+        // Memory Slider System
+        const memoryMsgs = [
+            "Ik chhoti jehi memory… par smile bahut vaddi. 🥹❤️",
+            "Tu hamesha aise hi pyaari baatein karti rehna. 💕",
+            "Tere naal har pal special lagda hai. ✨",
+            "Aapki cuteness ka koi mukabla nahi! 🐒❤️",
+            "Har memory ek khoobsurat ehsaas hai. 🌸",
+            "Tere bina sab boring lagda aa. 😂",
+            "Khushiyaan tere se hi shuru hundi ne. 🌷",
+            "Rabb kare hamari bond hamesha strong rahe. 🫶",
+            "Last memory before the final surprise… 🥹🎀"
         ];
-        let currentMem = 0;
 
-        function flipCard() {
-            document.getElementById('mem-card').classList.toggle('flipped');
+        let currentMemory = 0;
+
+        function initMemories() {
+            currentMemory = 0;
+            loadMemory(currentMemory);
+        }
+
+        function loadMemory(idx) {
+            document.getElementById('flipCard').classList.remove('flipped');
+            document.getElementById('memory-counter').innerText = `Memory ${idx + 1} of 9`;
+            document.getElementById('memory-img').src = `photo${idx + 1}.jpg`;
+            document.getElementById('memory-msg').innerText = memoryMsgs[idx];
         }
 
         function nextMemory() {
-            document.getElementById('mem-card').classList.remove('flipped');
-            currentMem++;
-            if (currentMem < memories.length) {
-                setTimeout(() => {
-                    document.getElementById('mem-counter').innerText = `Memory ${currentMem + 1} of 9`;
-                    document.getElementById('mem-img').src = memories[currentMem].img;
-                    document.getElementById('mem-text').innerText = memories[currentMem].text;
-                }, 300);
+            if(currentMemory < 8) {
+                currentMemory++;
+                loadMemory(currentMemory);
             } else {
                 nextScreen(11);
+            }
+        }
+
+        // Garland Decoration (photo1 to photo9)
+        function initGarland() {
+            const container = document.getElementById('garland-container');
+            container.innerHTML = '';
+            for(let i = 1; i <= 9; i++) {
+                const img = document.createElement('img');
+                img.src = `photo${i}.jpg`;
+                img.onerror = function() { this.src='https://via.placeholder.com/40'; };
+                container.appendChild(img);
             }
         }
     </script>
