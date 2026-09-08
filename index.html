@@ -569,10 +569,17 @@
         <h2>For You, With Love 🎧❤️</h2>
         <p>A final little surprise… press play when you're ready 🥹</p>
         
-        <audio controls style="width: 100%; margin: 15px 0;">
-            <source src="assets/final-surprise.mp3" type="audio/mpeg">
+        <!-- Audio Source mapped directly with GitHub subfolder & Raw fallbacks -->
+        <audio id="mainAudio" controls preload="auto" style="width: 100%; margin: 15px 0;">
+            <source src="Final-/final-surprise.mp3" type="audio/mpeg">
+            <source src="./Final-/final-surprise.mp3" type="audio/mpeg">
+            <source src="https://raw.githubusercontent.com/bobimanshal07-coder/bobir/main/Final-/final-surprise.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
+
+        <button class="btn" style="background: #28a745; margin-bottom: 10px;" onclick="forcePlayAudio()">
+            ▶️ Play Audio Song
+        </button>
 
         <button class="btn" onclick="nextScreen(13)">Next Surprise 🎁</button>
     </div>
@@ -824,6 +831,18 @@
                 img.src = `photo${i}.jpg`;
                 img.onerror = function() { this.src='https://via.placeholder.com/40'; };
                 container.appendChild(img);
+            }
+        }
+
+        // Explicit Audio Play Handler
+        function forcePlayAudio() {
+            const audio = document.getElementById('mainAudio');
+            if (audio) {
+                audio.play().then(() => {
+                    console.log("Audio playing successfully!");
+                }).catch(err => {
+                    console.error("Audio play error:", err);
+                });
             }
         }
     </script>
